@@ -178,7 +178,7 @@ Make sure you have the following installed:
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/your-username/smart-healthcare.git
+git clone https://github.com/Raviguptaji9565/smart-healthcare.git
 cd smart-healthcare
 ```
 
@@ -348,6 +348,58 @@ SmartHealth AI supports **two distinct user roles:**
 
 </div>
 
+
+---
+
+## 👨‍💻 Meet the Team
+
+> Built with passion by a dedicated team of developers at **SmartHealth AI**.
+
+<div align="center">
+
+### 👑 Team Leader
+
+</div>
+
+| | Name | Role | Responsibilities |
+|---|---|---|---|
+| 🥇 | **Ravi Gupta** | 🚀 Project Manager & Full-Stack Architect | System architecture design · FastAPI backend · Next.js frontend integration · JWT auth · REST API · Database schema · CORS & middleware · Team coordination & delivery |
+
+---
+
+<div align="center">
+
+### 👥 Team Members
+
+</div>
+
+| | Name | Role | Responsibilities |
+|---|---|---|---|
+| 🤖 | **Dhuru Madhuwal** | AI/ML & Healthcare Intelligence | Google Gemini AI integration · Health risk scoring algorithms · ML model integration · Risk assessment page · AI health assistant chatbot |
+| 🎨 | **Shikhar Srivastava** | Frontend & Mobile UI Developer | Tailwind CSS styling · Responsive mobile layouts · Landing page UI · Login & Register pages · Dashboard sidebar & navigation |
+| 🗄️ | **Sachin Yadav** | Backend, Database & API | API route handlers · SQLAlchemy ORM models · Pydantic schemas · Medicine reminders module · Appointments CRUD · Database setup & queries |
+
+---
+
+### 🗂️ Work Division Summary
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        SmartHealth AI — Team Roles                      │
+├──────────────────────┬──────────────────────────────────────────────────┤
+│  👑 Ravi Gupta       │  Project Lead · Full Stack · Architecture        │
+│                      │  Backend API · Auth · DB · Frontend Integration  │
+├──────────────────────┼──────────────────────────────────────────────────┤
+│  🤖 Dhuru Madhuwal   │  AI/ML · Gemini Integration · Risk Assessment    │
+│                      │  Health Scoring · AI Chat Assistant              │
+├──────────────────────┼──────────────────────────────────────────────────┤
+│  🎨 Shikhar          │  Frontend UI · Tailwind · Responsive Design      │
+│     Srivastava       │  Landing Page · Login · Register · Dashboard Nav │
+├──────────────────────┼──────────────────────────────────────────────────┤
+│  🗄️  Sachin Yadav    │  Backend Routes · ORM Models · API Schemas       │
+│                      │  Medicines · Appointments · Database Queries     │
+└──────────────────────┴──────────────────────────────────────────────────┘
+```
 ---
 
 ## 🤝 Contributing
@@ -386,7 +438,9 @@ This project is licensed under the **MIT License** — see the [LICENSE](./LICEN
 
 ⭐ Star this repo if you found it helpful!
 
-[![GitHub stars](https://img.shields.io/github/stars/your-username/smart-healthcare?style=social)](../../stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/your-username/smart-healthcare?style=social)](../../network/members)
+[![GitHub stars](https://img.shields.io/github/stars/Raviguptaji9565/smart-healthcare?style=social)](../../stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Raviguptaji9565/smart-healthcare?style=social)](../../network/members)
 
 </div>
+
+
