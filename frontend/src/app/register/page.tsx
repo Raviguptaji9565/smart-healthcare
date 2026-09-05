@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { apiUrl } from '@/lib/api';
+import { apiUrl, parseApiResponse } from '@/lib/api';
 
 export default function RegisterPage() {
   const [fullName, setFullName] = useState('');
@@ -31,8 +31,7 @@ export default function RegisterPage() {
         }),
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.detail || 'Registration failed');
+      await parseApiResponse(res);
 
       alert('Registration Successful! Please login now.');
       router.push('/login');

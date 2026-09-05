@@ -3,7 +3,7 @@
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { apiUrl } from '@/lib/api';
+import { apiUrl, parseApiResponse } from '@/lib/api';
 
 interface LoginResponse {
   user_id?: number;
@@ -51,16 +51,8 @@ export default function LoginPage() {
         }
       );
 
-      // Response ko safely read karein
-      const data: LoginResponse = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data?.user?.email ||
-            (data as { detail?: string })?.detail ||
-            'Invalid email or password'
-        );
-      }
+      // Safely parse JSON response
+      const data = await parseApiResponse<LoginResponse>(response);
 
       console.log('Login response:', data);
 
