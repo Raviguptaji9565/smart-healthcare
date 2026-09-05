@@ -22,6 +22,7 @@ def _engine_options(database_url: str):
     return {
         "pool_pre_ping": True,
         "pool_recycle": 300,
+        "connect_args": {"connect_timeout": 5},
     }
 
 def _create_engine(database_url: str):
