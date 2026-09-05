@@ -48,6 +48,7 @@ export default function LoginPage() {
             email: email.trim(),
             password,
           }),
+          signal: AbortSignal.timeout(10000),
         }
       );
 
@@ -96,10 +97,12 @@ export default function LoginPage() {
       } else {
         router.replace('/dashboard/combined');
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Login error:', err);
 
-      if (err instanceof Error) {
+      if (err?.name === 'TimeoutError' || err?.name === 'AbortError') {
+        setError('Server request timed out. Please verify that the backend is online.');
+      } else if (err instanceof Error) {
         setError(err.message);
       } else {
         setError('Unable to login. Please try again.');
