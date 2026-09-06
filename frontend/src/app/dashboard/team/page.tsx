@@ -1,10 +1,13 @@
 'use client';
 
+import Image from 'next/image';
+
 const TEAM_LEADER = {
   initials: 'RG',
   name: 'Ravi Gupta',
   role: 'Project Manager & Full-Stack Architect',
   tag: 'GROUP TEAM LEADER',
+  image: '/images/ravi.jpg',
   primaryContributions:
     'Leading the project vision, managing team coordination, and taking charge of the core integration between the React frontend and the Python FastAPI backend.',
   keyAchievements:
@@ -16,27 +19,32 @@ const TEAM_MEMBERS = [
     initials: 'DM',
     name: 'Dhuru Madhuwal',
     role: 'AI/ML & Healthcare Intelligence',
+    image: '', // Baki members ke liye bhi agar image add karni ho toh yahan path de sakte hain
     desc: 'Focused on health-risk scoring algorithms and ML integration.',
   },
   {
     initials: 'SS',
     name: 'Shikhar Srivastava',
     role: 'Frontend/Mobile UI Developer',
+    image: '',
     desc: 'Contributed to Tailwind styling and mobile responsiveness.',
   },
   {
     initials: 'SY',
     name: 'Sachin Yadav',
     role: 'Backend, Database & API',
+    image: '',
     desc: 'Handled API routing, backend setup, and data structures.',
   },
 ];
 
 function Avatar({
   initials,
+  image,
   size = 'md',
 }: {
   initials: string;
+  image?: string;
   size?: 'sm' | 'md' | 'lg';
 }) {
   const sizeClasses = {
@@ -44,6 +52,25 @@ function Avatar({
     md: 'w-12 h-12 text-base',
     lg: 'w-16 h-16 text-xl',
   };
+
+  const dimensions = {
+    sm: 40,
+    md: 48,
+    lg: 64,
+  };
+
+  if (image && image.trim() !== '') {
+    return (
+      <Image
+        src={image}
+        alt={initials}
+        width={dimensions[size]}
+        height={dimensions[size]}
+        className={`${sizeClasses[size]} rounded-xl object-cover shrink-0`}
+      />
+    );
+  }
+
   return (
     <div
       className={`${sizeClasses[size]} rounded-xl bg-teal-600 text-white font-bold flex items-center justify-center shrink-0`}
@@ -81,7 +108,7 @@ export default function TeamPage() {
 
           {/* Avatar + Name */}
           <div className="flex items-center gap-4 mb-5">
-            <Avatar initials={TEAM_LEADER.initials} size="lg" />
+            <Avatar initials={TEAM_LEADER.initials} image={TEAM_LEADER.image} size="lg" />
             <div>
               <h2 className="text-xl font-bold text-gray-800">{TEAM_LEADER.name}</h2>
               <p className="text-teal-600 font-semibold text-sm mt-0.5">{TEAM_LEADER.role}</p>
@@ -110,7 +137,7 @@ export default function TeamPage() {
             className="bg-white border border-gray-200 rounded-2xl p-5 hover:shadow-sm hover:border-teal-200 transition-all"
           >
             <div className="flex items-center gap-3 mb-3">
-              <Avatar initials={member.initials} size="md" />
+              <Avatar initials={member.initials} image={member.image} size="md" />
               <div>
                 <p className="font-bold text-gray-800 text-sm">{member.name}</p>
                 <p className="text-teal-600 text-xs font-medium mt-0.5">{member.role}</p>
