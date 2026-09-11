@@ -113,10 +113,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center px-4 animate-page-enter">
       <form
         onSubmit={handleLogin}
-        className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-xl p-8 shadow-xl"
+        className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-xl p-8 shadow-xl transition-shadow duration-300 hover:shadow-blue-950/40"
       >
         <div className="text-center mb-6">
           <Link href="/" className="inline-block text-3xl font-bold text-blue-400 hover:text-blue-300 transition">

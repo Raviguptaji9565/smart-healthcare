@@ -143,7 +143,7 @@ export default function DashboardLayout({
 
       {/* ─── SIDEBAR ───────────────────────────────────────────── */}
       <aside
-        className={`
+        className={`animate-slide-in-left
           fixed lg:static inset-y-0 left-0 z-30
           w-60 shrink-0 bg-gray-900 flex flex-col
           transform transition-transform duration-200
@@ -247,7 +247,7 @@ export default function DashboardLayout({
         </div>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-y-auto bg-gray-50">
+        <main className="flex-1 overflow-y-auto bg-gray-50 animate-page-enter">
           {children}
         </main>
       </div>
