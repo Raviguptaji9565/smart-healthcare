@@ -47,8 +47,8 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-950 px-4 text-white">
-      <div className="w-full max-w-md space-y-6 rounded-xl bg-gray-900 border border-gray-800 p-8 shadow-xl">
+    <div className="flex min-h-screen items-center justify-center bg-gray-950 px-4 text-white animate-page-enter">
+      <div className="w-full max-w-md space-y-6 rounded-xl bg-gray-900 border border-gray-800 p-8 shadow-xl transition-shadow duration-300 hover:shadow-blue-950/40">
         <div className="text-center">
           <Link href="/" className="inline-block text-3xl font-bold text-blue-400 hover:text-blue-300 transition">
             SmartHealth-AI
@@ -129,4 +129,3 @@ export default function RegisterPage() {
     </div>
   );
 }
-

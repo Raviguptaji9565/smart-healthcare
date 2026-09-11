@@ -48,13 +48,13 @@ const STATS = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+    <div className="min-h-screen bg-white text-gray-800 flex flex-col animate-page-enter">
 
       {/* Header */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-teal-600 flex items-center justify-center font-bold text-lg text-white">
+            <div className="w-8 h-8 rounded-lg bg-teal-600 flex items-center justify-center font-bold text-lg text-white transition-transform duration-300 hover:rotate-12">
               +
             </div>
             <span className="text-lg font-bold text-gray-800">
@@ -87,16 +87,16 @@ export default function Home() {
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-blue-50 pt-20 pb-24 px-6">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-100/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-100/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-float" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-float animate-delay-300" />
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200 text-xs font-semibold text-teal-700 mb-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200 text-xs font-semibold text-teal-700 mb-6 animate-slide-in-left">
             <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
             AI-Powered Healthcare Management System
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight mb-6 animate-page-enter animate-delay-100">
             Next-Generation{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-600">
               Healthcare
@@ -104,21 +104,21 @@ export default function Home() {
             for Everyone
           </h1>
 
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed mb-8">
+          <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed mb-8 animate-page-enter animate-delay-200">
             Monitor your health metrics, book appointments, track medications, and get AI health insights —
             all in one professional platform designed for patients and doctors.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-page-enter animate-delay-300">
             <Link
               href="/register"
-              className="w-full sm:w-auto px-8 py-3.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl transition shadow-lg shadow-teal-600/20 text-center"
+              className="w-full sm:w-auto px-8 py-3.5 bg-teal-600 hover:bg-teal-700 hover:-translate-y-1 text-white font-semibold rounded-xl transition shadow-lg shadow-teal-600/20 text-center"
             >
               Start Free →
             </Link>
             <Link
               href="/login"
-              className="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-gray-50 text-gray-700 font-semibold rounded-xl transition border border-gray-200 text-center"
+              className="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-gray-50 hover:-translate-y-1 text-gray-700 font-semibold rounded-xl transition border border-gray-200 text-center"
             >
               Access Dashboard
             </Link>
@@ -154,7 +154,8 @@ export default function Home() {
             {FEATURES.map((f) => (
               <div
                 key={f.title}
-                className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md hover:border-gray-300 transition-all"
+                className="bg-white border border-gray-200 rounded-2xl p-6 hover:-translate-y-1 hover:shadow-md hover:border-gray-300 transition-all animate-page-enter"
+                style={{ animationDelay: `${(STATS.length + FEATURES.indexOf(f)) * 70}ms` }}
               >
                 <div className={`w-11 h-11 rounded-xl border flex items-center justify-center text-xl mb-4 ${f.color}`}>
                   {f.icon}
