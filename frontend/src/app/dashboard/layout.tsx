@@ -37,6 +37,13 @@ const NAV_ITEMS = [
     match: (p: string) => p === '/dashboard/risk-assessment',
   },
   {
+    label: 'Analytics',
+    href: '/dashboard/analytics',
+    icon: '◒',
+    roles: ['patient', 'doctor'],
+    match: (p: string) => p === '/dashboard/analytics',
+  },
+  {
     label: 'Medicine Reminders',
     href: '/dashboard/medicines',
     icon: '💊',
