@@ -1,451 +1,399 @@
 <div align="center">
 
-![SmartHealth AI Banner](./docs/images/banner.jpg)
+# 🩺 Smart Healthcare System
 
-# ➕ SmartHealth AI
-### AI-Powered Healthcare Management Platform
+### Next-Generation AI-Powered Healthcare & Clinical Management Platform
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://smart-healthcare-phi.vercel.app/)
 [![Next.js](https://img.shields.io/badge/Next.js-16.3-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.141-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-4.0-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![SQLite](https://img.shields.io/badge/SQLite-3-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org/)
 [![Google Gemini](https://img.shields.io/badge/Google_Gemini-AI-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](./LICENSE)
 
-**Monitor health metrics · Book appointments · Track medications · Get AI health insights**
+<br />
 
-[🚀 Live Demo](#) · [📖 API Docs](#api-documentation) · [🐛 Report Bug](../../issues) · [✨ Request Feature](../../issues)
+**[🌐 Explore Live Application](https://smart-healthcare-phi.vercel.app/) · [📖 API Documentation](#-api-documentation) · [👥 Team & Contributors](#-team--contributors)**
 
 </div>
 
 ---
 
-## 📋 Table of Contents
+## 🌐 Live Demo Link
 
-- [Overview](#-overview)
-- [Features](#-features)
-- [Architecture](#-architecture)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the App](#running-the-app)
-- [API Documentation](#-api-documentation)
-- [User Roles](#-user-roles)
-- [Environment Variables](#-environment-variables)
-- [Contributing](#-contributing)
-- [License](#-license)
+The application is fully deployed and accessible live on Vercel:
+
+👉 **[https://smart-healthcare-phi.vercel.app/](https://smart-healthcare-phi.vercel.app/)**
 
 ---
 
-## 🌟 Overview
+## 📖 Overview
 
-**SmartHealth AI** is a full-stack, production-ready healthcare management platform that empowers patients and doctors with AI-driven insights, real-time health monitoring, and seamless appointment management — all in one unified platform.
+**Smart Healthcare System** is a modern, full-stack enterprise healthcare platform designed to streamline patient-doctor interaction, automate clinical workflows, and offer real-time intelligent health analytics. Powered by **Next.js 16**, **FastAPI**, and **Google Gemini AI**, the system connects patients, healthcare professionals, and system administrators into one seamless digital ecosystem.
 
-> ⚕️ *Disclaimer: This platform is intended for informational and educational purposes only and does not constitute medical advice.*
+From tracking vital metrics like heart rate and blood glucose to scheduling specialist consultations, monitoring daily medicine compliance, and generating AI-driven diagnostic risk scores, the platform provides end-to-end digital health management.
+
+> ⚕️ **Medical Disclaimer:** *Smart Healthcare System is designed for health tracking, appointment coordination, and educational AI assistance. It does not replace professional medical diagnosis, advice, or emergency medical services.*
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-![Features Showcase](./docs/images/features.jpg)
-
-| Feature | Description |
+| Category | Highlight Features |
 |---|---|
-| 📅 **Smart Appointment Booking** | Book consultations with specialist doctors in seconds with real-time status tracking |
-| 📊 **Health Metrics Tracking** | Monitor heart rate, blood pressure, glucose, and sleep from one unified dashboard |
-| 🤖 **AI Health Assistant** | 24/7 AI assistant powered by Google Gemini for instant health Q&A |
-| ⚠️ **Risk Assessment** | AI-powered health risk scoring that flags potential health concerns early |
-| 💊 **Medicine Reminders** | Track daily medications and mark doses as taken with a single click |
-| 🩺 **Doctor Clinical Portal** | Doctors manage patient queues, confirm appointments, and track daily schedules |
-| 🔐 **JWT Authentication** | Secure token-based auth with role-based access control (Patient / Doctor) |
-| 📱 **Responsive Design** | Fully responsive UI optimized for desktop, tablet, and mobile |
+| 📅 **Smart Appointment Booking** | Seamless online scheduling with specialist doctors, real-time availability slots, and instant status updates (`Pending`, `Confirmed`, `Completed`, `Cancelled`). |
+| 📈 **Health Metrics Tracking** | Dynamic dashboards for logging and visualizing vital health indicators: Heart Rate (BPM), Blood Pressure (Systolic/Diastolic), Blood Glucose, and Sleep Duration. |
+| 🤖 **AI Health Assistant** | Interactive 24/7 chatbot powered by **Google Gemini AI** providing context-aware health answers, symptom analysis, and preventive care guidance. |
+| ⚠️ **Predictive Risk Assessment** | Machine-learning model & heuristic algorithms that calculate comprehensive health risk scores based on user vitals and medical history. |
+| 💊 **Medication Management** | Daily prescription tracking with one-click dose mark-as-taken triggers, frequency logs, and compliance analytics. |
+| 🩺 **Clinical Doctor Dashboard** | Dedicated interface for medical practitioners to manage patient appointment queues, update consultation statuses, and view patient health logs. |
+| 🛡️ **Role-Based Access & Security** | JWT (JSON Web Tokens) authentication with fine-grained RBAC enforcing strict isolation between Patient, Doctor, and Admin access levels. |
+| 📊 **Interactive Analytics** | Real-time trend visualizers built with **Recharts** for historical health progress and patient vitals tracking. |
+| 📱 **Cross-Platform Responsive UI** | Modern, accessible, mobile-first design styled using **Tailwind CSS 4** and **Lucide Icons**. |
 
 ---
 
-## 🏗️ Architecture
+## 👥 User Roles & Permissions
 
-![System Architecture](./docs/images/architecture.jpg)
-
-The application follows a clean **client-server architecture** with a decoupled frontend and backend:
+The system enforces granular Role-Based Access Control (RBAC) across three distinct user categories:
 
 ```
-smart-healthcare/
-├── Frontend (Next.js 16 + TypeScript)   ←→   Backend (FastAPI + Python)   ←→   Database (SQLite)
-│    Port: 3000                               Port: 8000                           smart_healthcare.db
+                            ┌──────────────────────────────────┐
+                            │    Smart Healthcare Ecosystem    │
+                            └────────────────┬─────────────────┘
+                                             │
+         ┌───────────────────────────────────┼───────────────────────────────────┐
+         ▼                                   ▼                                   ▼
+┌──────────────────┐               ┌──────────────────┐               ┌──────────────────┐
+│   🧑‍⚕️ PATIENT     │               │   👨‍⚕️ DOCTOR     │               │   🛡️ ADMIN       │
+├──────────────────┤               ├──────────────────┤               ├──────────────────┤
+│ • Book Appointments              │ • View Patient Queue             │ • System Monitoring
+│ • Log Health Vitals              │ • Confirm/Cancel Consults        │ • User Management
+│ • Medicine Trackers              │ • Update Clinical Logs           │ • Platform Analytics
+│ • AI Chat Assistant              │ • Patient History Access         │ • Audit Oversight
+└──────────────────┘               └──────────────────┘               └──────────────────┘
 ```
 
-**Request Flow:**
-1. User interacts with the **Next.js** frontend
-2. Frontend makes **REST API calls** to the FastAPI backend
-3. Backend validates requests using **JWT tokens** and **Pydantic schemas**
-4. **SQLAlchemy ORM** queries/writes to the SQLite database
-5. AI features are powered by **Google Gemini API**
+### 🧑‍⚕️ 1. Patient Role
+* **Appointment Scheduling:** Search available doctors by specialization, select convenient time slots, and submit booking requests.
+* **Health Vitals Monitoring:** Log daily physiological metrics (heart rate, blood pressure, glucose levels, sleep patterns) with historical charts.
+* **Medication Compliance:** Record prescribed medications, set dosage frequencies, and mark daily doses as completed.
+* **AI Medical Assistant:** Access 24/7 conversational AI support for symptom inquiry and general wellness advice.
+* **Personal Health Logs:** Review comprehensive historical medical records and risk scoring diagnostics.
+
+### 👨‍⚕️ 2. Doctor Role
+* **Schedule & Queue Management:** View daily, weekly, and upcoming appointment requests organized by patient urgency and time slots.
+* **Appointment Action Center:** Confirm, reschedule, mark as completed, or cancel consultations with direct feedback to patients.
+* **Patient Health Record Review:** Inspect patient-consented health metrics, historical vitals, and medication history prior to consultations.
+* **Clinical Notes & Logs:** Update consultation logs and provide prescription notes post-appointment.
+
+### 🛡️ 3. Admin Role
+* **System Monitoring & Oversight:** Real-time visibility into active server metrics, API endpoint performance, and database health.
+* **User & Role Management:** Manage user profiles, verify credentialed medical practitioners, and handle account status activations/deactivations.
+* **Platform Analytics:** Access aggregated population health trends, system usage statistics, and appointment fulfillment metrics.
+* **Audit & Security Compliance:** Maintain platform security standards, monitor authentication logs, and ensure strict data privacy.
+
+---
+
+## 🔄 Complete Project Use Cases
+
+Here are the primary step-by-step workflow scenarios illustrating how users interact with the Smart Healthcare platform:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────────┐
+│ SCENARIO 1: Patient Onboarding, Vital Logging & AI Risk Assessment                          │
+└─────────────────────────────────────────────────────────────────────────────────────────────┘
+  [Patient] -> Registers/Logins to Patient Dashboard
+     │
+     ├──> Navigates to "Health Metrics" -> Inputs Vitals (BP: 120/80, Heart Rate: 72 BPM, Glucose: 95 mg/dL)
+     ├──> Visualizes real-time metric trends via interactive Recharts graphs
+     ├──> Navigates to "AI Risk Assessment" -> Clicks "Calculate Risk Score"
+     └──> Receives AI-generated Risk Profile (Low Risk / Healthy) with personalized recommendations
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────────┐
+│ SCENARIO 2: Appointment Booking & Clinical Consultation Workflow                            │
+└─────────────────────────────────────────────────────────────────────────────────────────────┘
+  [Patient] -> Opens "Book Appointment" -> Selects Cardiology -> Chooses Doctor & Time Slot
+     │
+     ├──> System creates appointment with status `Pending`
+     │
+  [Doctor] -> Logs into Doctor Clinical Portal -> Sees new appointment in "Pending Queue"
+     │
+     ├──> Inspects Patient Vitals & Health History
+     ├──> Clicks "Confirm Appointment" -> Status changes to `Confirmed`
+     ├──> Conducts Consultation -> Updates Consultation Status to `Completed` with prescription notes
+     └──> [Patient] receives completion confirmation on their dashboard feed
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────────┐
+│ SCENARIO 3: Medication Tracking & Daily Compliance                                         │
+└─────────────────────────────────────────────────────────────────────────────────────────────┘
+  [Patient] -> Navigates to "Medicine Tracker"
+     │
+     ├──> Adds new medication: "Amoxicillin 500mg" (Frequency: Twice Daily)
+     ├──> Receives daily dose checklist on dashboard
+     ├──> Clicks "Mark Dose as Taken" when medication is consumed
+     └──> Progress bar updates to reflect 100% daily compliance
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────────┐
+│ SCENARIO 4: Administrative Oversight & System Monitoring                                     │
+└─────────────────────────────────────────────────────────────────────────────────────────────┘
+  [Admin] -> Accesses Secure Admin Panel
+     │
+     ├──> Reviews system operational metrics (API response times, server load, DB storage)
+     ├──> Manages user roster: Approves new Doctor registrations & verifies medical licenses
+     └──> Generates high-level system utilization reports and audit activity logs
+```
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Frontend
-| Technology | Version | Purpose |
-|---|---|---|
-| [Next.js](https://nextjs.org/) | 16.3.0 | React framework with SSR & routing |
-| [React](https://react.dev/) | 19.2.8 | UI component library |
-| [TypeScript](https://www.typescriptlang.org/) | 5.x | Type-safe JavaScript |
-| [Tailwind CSS](https://tailwindcss.com/) | 4.x | Utility-first CSS framework |
+### 🎨 Frontend Framework & UI
+* **Framework:** [Next.js 16.3.0](https://nextjs.org/) (App Router, Server Components & Client Hooks)
+* **Library:** [React 19.2.8](https://react.dev/)
+* **Language:** [TypeScript 5.x](https://www.typescriptlang.org/) (Strict Type Safety)
+* **Styling:** [Tailwind CSS 4.x](https://tailwindcss.com/) (Utility-First Responsive Styling)
+* **Data Visualization:** [Recharts 3.x](https://recharts.org/) (Interactive Health Charts)
+* **Icons:** [Lucide React](https://lucide.dev/)
 
-### Backend
-| Technology | Version | Purpose |
-|---|---|---|
-| [FastAPI](https://fastapi.tiangolo.com/) | 0.141.1 | High-performance REST API framework |
-| [SQLAlchemy](https://www.sqlalchemy.org/) | 2.0.51 | Python ORM for database operations |
-| [Pydantic](https://docs.pydantic.dev/) | 2.12.5 | Data validation & settings management |
-| [Uvicorn](https://www.uvicorn.org/) | 0.52.1 | ASGI web server |
-| [Python-Jose](https://python-jose.readthedocs.io/) | 3.5.0 | JWT token handling |
-| [Bcrypt](https://pypi.org/project/bcrypt/) | 5.0.0 | Password hashing |
-| [Passlib](https://passlib.readthedocs.io/) | 1.7.4 | Password management |
+### ⚡ Backend API & Core Engine
+* **Framework:** [FastAPI 0.110+](https://fastapi.tiangolo.com/) (High-Performance Asynchronous Python Web Framework)
+* **Server:** [Uvicorn 0.28+](https://www.uvicorn.org/) (ASGI Server Execution) / Gunicorn (Production)
+* **Validation:** [Pydantic v2](https://docs.pydantic.dev/) (Data Validation & Schema Enforcement)
+* **Authentication:** JWT (JSON Web Tokens) with `python-jose` & `passlib` / `bcrypt`
+* **Export Engine:** [ReportLab](https://www.reportlab.com/) (Medical Report PDF Generation)
 
-### AI & Data
-| Technology | Purpose |
-|---|---|
-| [Google Gemini AI](https://ai.google.dev/) | AI health assistant & insights |
-| [Scikit-learn](https://scikit-learn.org/) | ML-based health risk predictions |
-| [Pandas & NumPy](https://pandas.pydata.org/) | Data processing & analytics |
-| [SQLite](https://sqlite.org/) | Lightweight embedded database |
+### 🗄️ Database & Storage
+* **Database:** SQLite 3 (Development) / PostgreSQL (Production ready with `psycopg2-binary`)
+* **ORM:** [SQLAlchemy 2.0+](https://www.sqlalchemy.org/) (Relational Mapping & Database Queries)
+
+### 🤖 AI & Analytics
+* **LLM Integration:** [Google Gemini AI API](https://ai.google.dev/) (24/7 AI Health Chat Assistant & Clinical Text Parsing)
+* **Data Science:** Scikit-Learn, Pandas, NumPy (Health Risk Scoring & Metrics Processing)
+
+### 🚀 Hosting & Infrastructure
+* **Frontend Hosting:** [Vercel](https://vercel.com/) (Automated Deployment Pipeline)
+* **Backend Hosting:** Render / Cloud VPS (REST API Deployment)
+* **Version Control:** Git & GitHub
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Directory Structure
 
 ```
 smart-healthcare/
 │
-├── 📂 backend/                   # FastAPI Python Backend
+├── 📂 backend/                     # FastAPI Asynchronous Python Backend
 │   └── app/
-│       ├── api/
-│       │   ├── auth.py           # Authentication routes (login, register)
-│       │   ├── appointments.py   # Appointment CRUD endpoints
-│       │   ├── health_metrics.py # Health metrics tracking endpoints
-│       │   └── medicines.py      # Medicine reminder endpoints
-│       ├── database/
-│       │   └── database.py       # SQLAlchemy engine & session setup
-│       ├── models/               # SQLAlchemy ORM models
-│       ├── schemas/              # Pydantic request/response schemas
-│       ├── services/             # Business logic layer
-│       └── main.py               # FastAPI app entry point & CORS
+│       ├── api/                    # API Route Handlers
+│       │   ├── auth.py             # User Authentication & JWT logic
+│       │   ├── appointments.py     # Appointment CRUD & status transitions
+│       │   ├── health_metrics.py   # Health vitals tracking & analytics
+│       │   └── medicines.py        # Medication tracking endpoints
+│       ├── database/               # Database Engine & Session Configuration
+│       │   └── database.py         # SQLAlchemy engine & sessionmaker
+│       ├── models/                 # SQLAlchemy Database ORM Models
+│       ├── schemas/                # Pydantic Schemas for Input/Output Validation
+│       ├── services/               # Business Logic & AI Integration
+│       └── main.py                 # FastAPI Application Entrypoint & CORS Policy
 │
-├── 📂 frontend/                  # Next.js TypeScript Frontend
+├── 📂 frontend/                    # Next.js 16 TypeScript Frontend
 │   └── src/app/
-│       ├── page.tsx              # Landing / Home page
-│       ├── layout.tsx            # Root layout
-│       ├── login/                # Login page
-│       ├── register/             # Registration page
-│       └── dashboard/
-│           ├── layout.tsx        # Dashboard shell (sidebar + nav)
-│           ├── patient/          # Patient dashboard
-│           ├── doctor/           # Doctor clinical portal
-│           ├── ai-assistant/     # AI health chatbot
-│           ├── risk-assessment/  # Risk scoring page
-│           ├── medicines/        # Medicine tracker
-│           ├── book-appointment/ # Appointment booking
-│           └── team/             # Team/about page
+│       ├── page.tsx                # Public Landing Page
+│       ├── layout.tsx              # Root App Layout & Providers
+│       ├── login/                  # Login Screen
+│       ├── register/               # User Registration Screen
+│       └── dashboard/              # Protected Dashboard Ecosystem
+│           ├── layout.tsx          # Dashboard Shell (Sidebar + Navigation)
+│           ├── patient/            # Patient Vitals & Health Dashboard
+│           ├── doctor/             # Doctor Clinical Portal & Queue Management
+│           ├── admin/              # System Monitoring & Admin Oversight
+│           ├── ai-assistant/       # 24/7 AI Chat Assistant Interface
+│           ├── risk-assessment/    # AI Health Risk Diagnostic Tool
+│           ├── medicines/          # Prescription & Medicine Tracker
+│           ├── book-appointment/   # Doctor Search & Booking Interface
+│           └── team/               # Project Contributors Page
 │
-├── 📂 docs/images/               # README assets & screenshots
-├── requirements.txt              # Python dependencies
-├── run_project.bat               # One-click launcher (Windows)
-├── run_backend.bat               # Start backend only
-└── run_frontend.bat              # Start frontend only
+├── 📂 docs/                        # Project Documentation & Screenshots
+├── requirements.txt                # Python Backend Dependencies
+├── Procfile                        # Production Server Process Commands
+├── render.yaml                     # Render Cloud Deployment Blueprint
+├── run_project.bat                 # One-Click Launch Script (Windows)
+├── run_backend.bat                 # Backend Launch Script
+└── run_frontend.bat                # Frontend Launch Script
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Getting Started & Installation Guide
+
+Follow these steps to set up and run the Smart Healthcare System locally on your environment.
 
 ### Prerequisites
 
-Make sure you have the following installed:
+Ensure you have the following installed on your machine:
+* **Node.js** 18.x or higher -> [Download Node.js](https://nodejs.org/)
+* **Python** 3.11 or higher -> [Download Python](https://python.org/)
+* **Git** -> [Download Git](https://git-scm.com/)
 
-- **Python** 3.11+ → [Download](https://python.org/downloads/)
-- **Node.js** 18+ → [Download](https://nodejs.org/)
-- **npm** 9+ (comes with Node.js)
-- **Git** → [Download](https://git-scm.com/)
+---
 
-### Installation
-
-**1. Clone the repository**
+### Step 1: Clone the Repository
 
 ```bash
 git clone https://github.com/Raviguptaji9565/smart-healthcare.git
 cd smart-healthcare
 ```
 
-**2. Set up the Backend**
+---
+
+### Step 2: Configure & Launch Backend
 
 ```bash
-# Create and activate a virtual environment
+# 1. Create a Python Virtual Environment
 python -m venv backend/venv
 
-# Windows
-backend\venv\Scripts\activate
-
-# macOS/Linux
+# 2. Activate Virtual Environment
+# On Windows (PowerShell):
+backend\venv\Scripts\Activate.ps1
+# On macOS/Linux:
 source backend/venv/bin/activate
 
-# Install Python dependencies
+# 3. Install Python Dependencies
 pip install -r requirements.txt
+
+# 4. Set Up Backend Environment Variables
+cp backend/.env.example backend/.env   # Create .env from template
 ```
 
-**3. Configure Backend Environment**
-
-```bash
-# Copy the example file
-cp backend/.env.example backend/.env
-```
-
-Edit `backend/.env` with your values:
+Configure your `backend/.env` file:
 ```env
-SECRET_KEY=your-super-secret-jwt-key-here
+SECRET_KEY=your_super_secret_jwt_key_here
 ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-GEMINI_API_KEY=your-google-gemini-api-key
+ACCESS_TOKEN_EXPIRE_MINUTES=60
+GEMINI_API_KEY=your_google_gemini_api_key_here
 ```
 
-**4. Set up the Frontend**
+Start the FastAPI server:
+```bash
+cd backend
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+> ⚡ Backend will be available at: `http://localhost:8000`
+
+---
+
+### Step 3: Configure & Launch Frontend
+
+Open a new terminal window:
 
 ```bash
+# 1. Navigate to frontend directory
 cd frontend
+
+# 2. Install Node Dependencies
 npm install
+
+# 3. Configure Frontend Environment Variables
 ```
 
-Configure `frontend/.env.local`:
+Create `frontend/.env.local`:
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
-### Running the App
+Start the Next.js development server:
+```bash
+npm run dev
+```
+> 🌐 Frontend will be accessible at: `http://localhost:3000`
 
-#### Option A — One-Click Launch (Windows) ⚡
+---
 
-Simply double-click **`run_project.bat`** in the project root, or run:
+### Step 4: One-Click Launch (Windows Quick Start) ⚡
+
+If you are on Windows, you can launch both Frontend and Backend concurrently with a single command:
 
 ```bat
 run_project.bat
 ```
 
-This starts both the backend and frontend simultaneously.
+---
 
-#### Option B — Manual Start
+## 📡 Local Server Endpoints & Documentation
 
-**Terminal 1 — Start Backend:**
-```bash
-# From project root, with venv activated
-cd backend
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-```
-
-**Terminal 2 — Start Frontend:**
-```bash
-cd frontend
-npm run dev
-```
-
-#### Access the App
-
-| Service | URL |
-|---|---|
-| 🌐 Frontend (App) | http://localhost:3000 |
-| ⚡ Backend API | http://localhost:8000 |
-| 📖 API Swagger Docs | http://localhost:8000/docs |
-| 📚 API ReDoc | http://localhost:8000/redoc |
+| Service | Access URL | Description |
+|---|---|---|
+| 🌐 **Web Frontend** | `http://localhost:3000` | Next.js Web Interface |
+| ⚡ **REST API Engine** | `http://localhost:8000` | FastAPI Base Backend |
+| 📖 **Interactive OpenAPI Docs** | `http://localhost:8000/docs` | Swagger UI API Explorer |
+| 📚 **ReDoc Documentation** | `http://localhost:8000/redoc` | OpenAPI Reference |
 
 ---
 
-## 📖 API Documentation
+## 👥 Team & Contributors
 
-The backend auto-generates interactive API documentation via Swagger UI.
-
-**Base URL:** `http://localhost:8000`
-
-### Endpoints Overview
-
-| Category | Method | Endpoint | Description |
-|---|---|---|---|
-| **Auth** | `POST` | `/api/auth/register` | Register a new user (patient/doctor) |
-| **Auth** | `POST` | `/api/auth/login` | Login & receive JWT token |
-| **Auth** | `GET` | `/api/auth/me` | Get current user profile |
-| **Appointments** | `GET` | `/api/appointments` | List all appointments |
-| **Appointments** | `POST` | `/api/appointments` | Book a new appointment |
-| **Appointments** | `PUT` | `/api/appointments/{id}` | Update appointment status |
-| **Appointments** | `DELETE` | `/api/appointments/{id}` | Cancel appointment |
-| **Health Metrics** | `GET` | `/api/health-metrics` | Retrieve logged health data |
-| **Health Metrics** | `POST` | `/api/health-metrics` | Log new health measurement |
-| **Health Metrics** | `GET` | `/api/health-metrics/risk` | Get AI risk assessment score |
-| **Medicines** | `GET` | `/api/medicines` | List all medicine reminders |
-| **Medicines** | `POST` | `/api/medicines` | Add a new medicine reminder |
-| **Medicines** | `PUT` | `/api/medicines/{id}` | Mark medicine as taken |
-| **Medicines** | `DELETE` | `/api/medicines/{id}` | Delete a medicine |
-
-> 🔐 All endpoints (except `/register` and `/login`) require a **Bearer token** in the `Authorization` header.
-
----
-
-## 👥 User Roles
-
-SmartHealth AI supports **two distinct user roles:**
-
-### 🧑‍⚕️ Patient
-- View & update personal health metrics (heart rate, BP, glucose, sleep)
-- Book appointments with doctors
-- Track daily medications & mark doses taken
-- Chat with the AI health assistant
-- View AI-generated health risk assessment
-- Access personal health history & trends
-
-### 👨‍⚕️ Doctor
-- View patient appointment queue
-- Confirm, complete, or cancel appointments
-- Access the clinical management portal
-- View daily patient schedule
-
----
-
-## 🔐 Environment Variables
-
-### Backend (`backend/.env`)
-
-| Variable | Required | Default | Description |
-|---|---|---|---|
-| `SECRET_KEY` | ✅ | — | JWT signing secret key |
-| `ALGORITHM` | ✅ | `HS256` | JWT algorithm |
-| `ACCESS_TOKEN_EXPIRE_MINUTES` | ✅ | `30` | Token expiry in minutes |
-| `GEMINI_API_KEY` | ✅ | — | Google Gemini AI API key |
-
-### Frontend (`frontend/.env.local`)
-
-| Variable | Required | Default | Description |
-|---|---|---|---|
-| `NEXT_PUBLIC_API_URL` | ✅ | `http://localhost:8000` | Backend API base URL |
-
-> 🔑 Get a free Gemini API key at [Google AI Studio](https://aistudio.google.com/app/apikey)
-
----
-
-## 📊 Project Stats
+This project was architected, developed, and deployed with passion by a dedicated 4-member full-stack engineering team:
 
 <div align="center">
 
-| Metric | Value |
-|---|---|
-| 🔌 API Endpoints | 15+ |
-| 📄 App Pages | 8+ |
-| 👤 User Roles | 2 (Patient & Doctor) |
-| 🧠 Health Models | 4 |
-| 🐍 Python Packages | 50+ |
-| ⚛️ React Version | 19.x |
+### 👑 Project Leadership
 
 </div>
 
-
----
-
-## 👨‍💻 Meet the Team
-
-> Built with passion by a dedicated team of developers at **SmartHealth AI**.
-
-<div align="center">
-
-### 👑 Team Leader
-
-</div>
-
-| | Name | Role | Responsibilities |
-|---|---|---|---|
-| 🥇 | **Ravi Gupta** | 🚀 Project Manager & Full-Stack Architect | System architecture design · FastAPI backend · Next.js frontend integration · JWT auth · REST API · Database schema · CORS & middleware · Team coordination & delivery |
+| Member | Profile & Links | Role & Core Contributions |
+|---|---|---|
+| 👑 **Ravi Gupta** | [![GitHub](https://img.shields.io/badge/GitHub-Raviguptaji9565-181717?style=flat&logo=github)](https://github.com/Raviguptaji9565) | **Project Owner & Full-Stack Architect**<br />• System Architecture Design & Project Roadmap<br />• FastAPI Core Setup, JWT Auth & RBAC Security<br />• Next.js 16 App Router Integration & Routing<br />• Deployment Lead (Vercel & Render Integration) |
 
 ---
 
 <div align="center">
 
-### 👥 Team Members
+### 👥 Engineering Team
 
 </div>
 
-| | Name | Role | Responsibilities |
-|---|---|---|---|
-| 🤖 | **Dhuru Madhuwal** | AI/ML & Healthcare Intelligence | Google Gemini AI integration · Health risk scoring algorithms · ML model integration · Risk assessment page · AI health assistant chatbot |
-| 🎨 | **Shikhar Srivastava** | Frontend & Mobile UI Developer | Tailwind CSS styling · Responsive mobile layouts · Landing page UI · Login & Register pages · Dashboard sidebar & navigation |
-| 🗄️ | **Sachin Yadav** | Backend, Database & API | API route handlers · SQLAlchemy ORM models · Pydantic schemas · Medicine reminders module · Appointments CRUD · Database setup & queries |
+| Member | Profile & Links | Role & Core Contributions |
+|---|---|---|
+| 🤖 **Dhuru Madhuwal** | [![GitHub](https://img.shields.io/badge/GitHub-dhurumadhuwal420-181717?style=flat&logo=github)](https://github.com/dhurumadhuwal420) | **AI/ML & Health Intelligence Specialist**<br />• Google Gemini AI Integration & Prompt Engineering<br />• Health Risk Assessment Algorithm & Diagnostics<br />• AI Health Assistant Chatbot Interface & Logic |
+| 🎨 **Shikhar Srivastava** | [![GitHub](https://img.shields.io/badge/GitHub-Shikhrsrivastavji-181717?style=flat&logo=github)](https://github.com/Shikhrsrivastavji) | **Frontend & UI/UX Developer**<br />• Tailwind CSS 4 Design System & Styling<br />• Landing Page & Responsive Dashboard Shell<br />• Patient & Doctor Navigation Layouts |
+| 🗄️ **Sachin Yadav** | [![GitHub](https://img.shields.io/badge/GitHub-yadavsachin0011-181717?style=flat&logo=github)](https://github.com/yadavsachin0011) | **Backend Engine & Database Engineer**<br />• SQLAlchemy ORM Data Models & Migrations<br />• Pydantic Schema Validation & Endpoints<br />• Appointments & Medication Reminders Logic |
 
----
-
-### 🗂️ Work Division Summary
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                        SmartHealth AI — Team Roles                      │
-├──────────────────────┬──────────────────────────────────────────────────┤
-│  👑 Ravi Gupta       │  Project Lead · Full Stack · Architecture        │
-│                      │  Backend API · Auth · DB · Frontend Integration  │
-├──────────────────────┼──────────────────────────────────────────────────┤
-│  🤖 Dhuru Madhuwal   │  AI/ML · Gemini Integration · Risk Assessment    │
-│                      │  Health Scoring · AI Chat Assistant              │
-├──────────────────────┼──────────────────────────────────────────────────┤
-│  🎨 Shikhar          │  Frontend UI · Tailwind · Responsive Design      │
-│     Srivastava       │  Landing Page · Login · Register · Dashboard Nav │
-├──────────────────────┼──────────────────────────────────────────────────┤
-│  🗄️  Sachin Yadav    │  Backend Routes · ORM Models · API Schemas       │
-│                      │  Medicines · Appointments · Database Queries     │
-└──────────────────────┴──────────────────────────────────────────────────┘
-```
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Here is how to get started:
+Contributions are always welcome! If you'd like to improve the Smart Healthcare System:
 
-1. **Fork** the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. **Commit** your changes: `git commit -m "Add amazing feature"`
-4. **Push** to the branch: `git push origin feature/amazing-feature`
-5. Open a **Pull Request**
-
-Please make sure your code follows the existing style conventions and includes appropriate tests.
+1. **Fork** the repository.
+2. Create your feature branch: `git checkout -b feature/AmazingFeature`
+3. Commit your changes: `git commit -m 'Add some AmazingFeature'`
+4. Push to the branch: `git push origin feature/AmazingFeature`
+5. Open a **Pull Request**.
 
 ---
 
 ## 📜 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](./LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgements
-
-- [FastAPI](https://fastapi.tiangolo.com/) — for the incredible Python web framework
-- [Next.js](https://nextjs.org/) — for the production-grade React framework
-- [Google Gemini](https://ai.google.dev/) — for powering the AI health assistant
-- [Tailwind CSS](https://tailwindcss.com/) — for the beautiful utility-first styling
-- [SQLAlchemy](https://www.sqlalchemy.org/) — for robust ORM capabilities
+This project is licensed under the **MIT License** — see the [LICENSE](./LICENSE) file for full details.
 
 ---
 
 <div align="center">
 
-**Made with ❤️ for better healthcare**
+**Designed & Developed with ❤️ by the Smart Healthcare Team**
 
-⭐ Star this repo if you found it helpful!
+⭐ **If you find this repository useful, please consider giving it a star!** ⭐
 
-[![GitHub stars](https://img.shields.io/github/stars/Raviguptaji9565/smart-healthcare?style=social)](../../stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Raviguptaji9565/smart-healthcare?style=social)](../../network/members)
+[![GitHub stars](https://img.shields.io/github/stars/Raviguptaji9565/smart-healthcare?style=social)](https://github.com/Raviguptaji9565/smart-healthcare/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Raviguptaji9565/smart-healthcare?style=social)](https://github.com/Raviguptaji9565/smart-healthcare/network/members)
 
 </div>
-
-
-Ravi Gupta
-Ravi contribution update
-Dhuru contribution update
-Shikhar contribution update
-Sachin contribution update
