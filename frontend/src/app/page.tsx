@@ -91,9 +91,23 @@ export default function Home() {
         <div className="absolute top-1/4 left-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 animate-float" />
         <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-3xl pointer-events-none animate-float animate-delay-300" />
 
-        {/* Matrix Grid Background Overlay */}
-        <div className="hero-background absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+        {/* Matrix Grid & Dynamic Holographic Neural Background Overlay */}
+        <div className="hero-background absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
           <div className="hero-background__glow" />
+          
+          {/* Layered Background Neural Network SVG */}
+          <svg className="tech-network absolute inset-0 w-full h-full opacity-35" viewBox="0 0 1200 620" preserveAspectRatio="none">
+            <g className="tech-network__lines" fill="none" strokeLinecap="round">
+              <path d="M38 128 L185 78 L310 170 L438 96 L580 154 L735 68 L884 142 L1020 78 L1170 154" stroke="rgba(45, 212, 191, 0.25)" strokeWidth="1" />
+              <path d="M78 432 L210 348 L348 470 L488 356 L625 448 L770 330 L918 420 L1062 310 L1178 392" stroke="rgba(56, 189, 248, 0.25)" strokeWidth="1" />
+              <path d="M185 78 L210 348 M310 170 L348 470 M438 96 L488 356 M580 154 L625 448 M735 68 L770 330 M884 142 L918 420" stroke="rgba(45, 212, 191, 0.2)" strokeWidth="1" strokeDasharray="4 8" />
+            </g>
+            <g className="tech-network__nodes" fill="rgba(45, 212, 191, 0.6)">
+              {[[38, 128], [185, 78], [310, 170], [438, 96], [580, 154], [735, 68], [884, 142], [1020, 78], [1170, 154], [78, 432], [210, 348], [348, 470], [488, 356], [625, 448], [770, 330], [918, 420]].map(([cx, cy], idx) => (
+                <circle key={`bg-node-${idx}`} cx={cx} cy={cy} r={idx % 2 === 0 ? 3 : 2} className="animate-pulse" />
+              ))}
+            </g>
+          </svg>
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -115,7 +129,7 @@ export default function Home() {
               </h1>
 
               <p className="text-base sm:text-lg text-slate-300 max-w-xl leading-relaxed mb-8 animate-page-enter animate-delay-200">
-                Monitor real-time health metrics, schedule doctor consultations, automate medicine reminders, and unlock instant AI health insights — all in one unified, secure platform.
+                Monitor real-time health metrics, schedule doctor consultations, automate medicine reminders, and unlock instant smart healthcare system insights — all in one unified, secure platform.
               </p>
 
               {/* Action Buttons */}
@@ -141,7 +155,7 @@ export default function Home() {
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-6 border-t border-slate-800/80 w-full animate-page-enter animate-delay-400">
                 <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-300 font-medium">
                   <div className="w-2 h-2 rounded-full bg-teal-400 shadow-[0_0_8px_#2dd4bf]" />
-                  24/7 AI Diagnostic
+                  24/7 Diagnostic
                 </div>
                 <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-300 font-medium">
                   <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#38bdf8]" />
@@ -258,10 +272,10 @@ export default function Home() {
 
                 {/* Floating Holographic Status Cards */}
                 
-                {/* Top-Right Badge: AI Antigravity Assist Core */}
+                {/* Top-Right Badge: Antigravity Assist Core */}
                 <div className="absolute -top-3 -right-3 sm:top-3 sm:right-3 px-3.5 py-2 rounded-xl bg-slate-900/90 border border-teal-400/50 text-xs font-semibold text-teal-200 backdrop-blur-md shadow-[0_0_25px_rgba(20,184,166,0.35)] flex items-center gap-2 animate-float">
                   <div className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse shadow-[0_0_10px_#2dd4bf]" />
-                  <span>AI Antigravity Assist Core</span>
+                  <span>Antigravity Assist Core</span>
                 </div>
 
                 {/* Bottom-Left Badge: Zero-G Bio-Monitor */}
