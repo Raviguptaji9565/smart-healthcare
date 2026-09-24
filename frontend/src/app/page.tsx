@@ -258,18 +258,18 @@ export default function Home() {
 
                 {/* Floating Holographic Status Cards */}
                 
-                {/* Top-Right Badge: AI Health Engine Active */}
-                <div className="absolute -top-3 -right-3 sm:top-4 sm:right-4 px-3.5 py-2 rounded-xl bg-slate-900/90 border border-teal-400/40 text-xs font-semibold text-teal-200 backdrop-blur-md shadow-[0_0_20px_rgba(20,184,166,0.3)] flex items-center gap-2 animate-float">
-                  <div className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse shadow-[0_0_8px_#2dd4bf]" />
-                  <span>Gemini AI Health Core</span>
+                {/* Top-Right Badge: AI Antigravity Assist Core */}
+                <div className="absolute -top-3 -right-3 sm:top-3 sm:right-3 px-3.5 py-2 rounded-xl bg-slate-900/90 border border-teal-400/50 text-xs font-semibold text-teal-200 backdrop-blur-md shadow-[0_0_25px_rgba(20,184,166,0.35)] flex items-center gap-2 animate-float">
+                  <div className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse shadow-[0_0_10px_#2dd4bf]" />
+                  <span>AI Antigravity Assist Core</span>
                 </div>
 
-                {/* Bottom-Left Badge: Real-Time Diagnostic Accuracy */}
-                <div className="absolute -bottom-3 -left-3 sm:bottom-4 sm:left-4 px-3.5 py-2 rounded-xl bg-slate-900/90 border border-cyan-400/40 text-xs font-semibold text-cyan-200 backdrop-blur-md shadow-[0_0_20px_rgba(56,189,248,0.3)] flex items-center gap-2 animate-float animate-delay-300">
-                  <svg className="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                {/* Bottom-Left Badge: Zero-G Bio-Monitor */}
+                <div className="absolute -bottom-3 -left-3 sm:bottom-3 sm:left-3 px-3.5 py-2 rounded-xl bg-slate-900/90 border border-cyan-400/50 text-xs font-semibold text-cyan-200 backdrop-blur-md shadow-[0_0_25px_rgba(56,189,248,0.35)] flex items-center gap-2 animate-float animate-delay-300">
+                  <svg className="w-4 h-4 text-cyan-400 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
-                  <span>99.4% Diagnostic Accuracy</span>
+                  <span>Zero-G Bio-Monitor</span>
                 </div>
 
               </div>
