@@ -1,0 +1,18 @@
+[33m5162778[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: commit (amend): feat: implement end-to-end Download PDF Medical Summary feature
+[33m9d6d262[m HEAD@{1}: commit: feat: implement end-to-end Download PDF Medical Summary feature
+[33m30a9ae7[m HEAD@{2}: commit: feat(ui): implement futuristic engineering flashcard UI/UX for project team page
+[33mb9aafb8[m HEAD@{3}: commit: fix(frontend): pin react-is version for recharts compatibility
+[33m412a2b1[m HEAD@{4}: pull origin main: Fast-forward
+[33m5a9db00[m HEAD@{5}: commit: Rename image to ravi.jpg
+[33m17cce0d[m HEAD@{6}: commit: Add Ravi profile image and update team page component
+[33m8e51ac8[m HEAD@{7}: commit: fix: finalize render.yaml configuration
+[33m9ca7699[m HEAD@{8}: commit: fix: update requirements.txt with backend packages
+[33me62ae44[m HEAD@{9}: commit: fix: add 10s request timeout to prevent hanging login button
+[33m1cdb5f0[m HEAD@{10}: commit: fix: lightweight root requirements.txt, root main.py entrypoint, and database connect timeout
+[33md9528fc[m HEAD@{11}: commit: Add requirements.txt for Render deployment
+[33m2a296f2[m HEAD@{12}: commit: fix: safe api response parsing and prevent localhost rewrites on vercel
+[33m541b1b4[m HEAD@{13}: commit: feat: configure backend for Render deployment and connect with Vercel frontend
+[33mc36a147[m HEAD@{14}: commit: docs: add team section — Ravi Gupta (Lead), Dhuru Madhuwal, Shikhar Srivastava, Sachin Yadav
+[33m3c1b8f0[m HEAD@{15}: commit: docs: add professional README with banner, architecture & feature images
+[33me69cdf1[m HEAD@{16}: Branch: renamed refs/heads/master to refs/heads/main
+[33me69cdf1[m HEAD@{18}: commit (initial): Upload complete project with frontend and backend

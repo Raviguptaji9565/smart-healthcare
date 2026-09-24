@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+pydantic
+email-validator
+python-dotenv
+bcrypt
+passlib
+reportlab>=4.0.0
