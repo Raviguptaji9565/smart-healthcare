@@ -85,94 +85,196 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 pt-20 pb-24 px-6">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-float" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-float animate-delay-300" />
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 pt-16 pb-24 px-6 sm:px-8 lg:px-12">
+        {/* Ambient Glowing Background Orbs */}
+        <div className="absolute top-1/4 left-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 animate-float" />
+        <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-3xl pointer-events-none animate-float animate-delay-300" />
 
+        {/* Matrix Grid Background Overlay */}
         <div className="hero-background absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
           <div className="hero-background__glow" />
-          <svg
-            className="tech-network h-full w-full"
-            viewBox="0 0 1200 620"
-            preserveAspectRatio="none"
-          >
-          <g className="tech-network__brain" fill="none" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M530 302c-30-38-8-86 38-91 13-36 64-42 88-10 38-20 83 8 78 51 39 15 42 70 7 94 7 42-36 69-70 49-30 28-80 17-91-22-42 1-67-32-50-71Z" />
-            <path d="M602 212c-18 24-18 48 0 72s18 48 0 72 18 48 0 72M548 254h40l23-27M656 229l-22 38 32 31-40 33 28 36M540 318l38-1 24 25M624 212v26l-22 22M624 362l-22 23" />
-            <circle cx="602" cy="212" r="4" />
-            <circle cx="548" cy="254" r="3" />
-            <circle cx="656" cy="229" r="3" />
-            <circle cx="578" cy="317" r="3" />
-            <circle cx="624" cy="362" r="3" />
-          </g>
-          <g className="tech-network__lines" fill="none" strokeLinecap="round">
-            <path d="M38 128 185 78 310 170 438 96 580 154 735 68 884 142 1020 78 1170 154" />
-            <path d="M78 432 210 348 348 470 488 356 625 448 770 330 918 420 1062 310 1178 392" />
-            <path d="M185 78 210 348M310 170 348 470M438 96 488 356M580 154 625 448M735 68 770 330M884 142 918 420M1020 78 1062 310" />
-            <path d="M38 128 78 432M1170 154 1178 392" />
-          </g>
-          <g className="tech-network__streams" fill="none" strokeLinecap="round">
-            <path d="M-20 520 C180 400 270 560 460 430 S760 330 940 470 S1120 520 1220 390" />
-            <path d="M-20 190 C150 270 240 130 410 215 S700 300 860 190 S1080 110 1220 220" />
-          </g>
-          <g className="tech-network__nodes">
-            {[
-              [38, 128], [185, 78], [310, 170], [438, 96], [580, 154], [735, 68],
-              [884, 142], [1020, 78], [1170, 154], [78, 432], [210, 348], [348, 470],
-              [488, 356], [625, 448], [770, 330], [918, 420], [1062, 310], [1178, 392],
-            ].map(([cx, cy], index) => (
-              <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={index % 3 === 0 ? 3 : 2} />
-            ))}
-          </g>
-          <g className="tech-network__particles">
-            {[
-              [136, 275], [270, 118], [405, 294], [538, 520], [710, 228],
-              [832, 520], [974, 262], [1108, 470], [1140, 90],
-            ].map(([cx, cy], index) => (
-              <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={index % 2 === 0 ? 2.5 : 1.5} />
-            ))}
-          </g>
-          <g className="tech-network__helix" fill="none" strokeLinecap="round">
-            <path d="M930 164 C1015 204 1015 270 930 310 C845 350 845 416 930 456" />
-            <path d="M1010 164 C925 204 925 270 1010 310 C1095 350 1095 416 1010 456" />
-            <path d="M950 177 990 177M930 225 1010 225M930 273 1010 273M950 321 990 321M930 369 1010 369M930 417 1010 417" />
-          </g>
-          </svg>
         </div>
 
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-400/10 border border-teal-300/30 text-xs font-semibold text-teal-200 mb-6 animate-slide-in-left">
-            <span className="w-2 h-2 rounded-full bg-teal-300 animate-pulse" />
-            AI-Powered Healthcare Management System
-          </div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            {/* Left Column - Hero Text & Action CTAs */}
+            <div className="lg:col-span-7 flex flex-col items-start text-left pt-4 lg:pt-0">
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-teal-400/10 border border-teal-400/30 text-xs sm:text-sm font-semibold text-teal-200 mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(20,184,166,0.15)] animate-slide-in-left">
+                <span className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse shadow-[0_0_10px_#2dd4bf]" />
+                Next-Gen Healthcare Platform
+              </div>
 
-          <h1 className="hero-heading text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6 animate-page-enter animate-delay-100">
-            Next-Generation{' '}
-            <span>
-              Healthcare
-            </span>{' '}
-            for Everyone
-          </h1>
+              <h1 className="hero-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] mb-6 text-white">
+                Next-Generation{' '}
+                <span className="bg-gradient-to-r from-teal-300 via-cyan-200 to-teal-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(20,184,166,0.4)]">
+                  Healthcare
+                </span>{' '}
+                for Everyone
+              </h1>
 
-          <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8 animate-page-enter animate-delay-200">
-            Monitor your health metrics, book appointments, track medications, and get AI health insights —
-            all in one professional platform designed for patients and doctors.
-          </p>
+              <p className="text-base sm:text-lg text-slate-300 max-w-xl leading-relaxed mb-8 animate-page-enter animate-delay-200">
+                Monitor real-time health metrics, schedule doctor consultations, automate medicine reminders, and unlock instant AI health insights — all in one unified, secure platform.
+              </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-page-enter animate-delay-300">
-            <Link
-              href="/register"
-              className="w-full sm:w-auto px-8 py-3.5 bg-teal-600 hover:bg-teal-700 hover:-translate-y-1 text-white font-semibold rounded-xl transition shadow-lg shadow-teal-600/20 text-center"
-            >
-              Start Free →
-            </Link>
-            <Link
-              href="/login"
-              className="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-gray-50 hover:-translate-y-1 text-gray-700 font-semibold rounded-xl transition border border-gray-200 text-center"
-            >
-              Access Dashboard
-            </Link>
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-10 animate-page-enter animate-delay-300">
+                <Link
+                  href="/register"
+                  className="px-8 py-3.5 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-[0_0_25px_rgba(20,184,166,0.4)] hover:shadow-[0_0_35px_rgba(20,184,166,0.6)] hover:-translate-y-0.5 text-center flex items-center justify-center gap-2"
+                >
+                  Start Free
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+                <Link
+                  href="/login"
+                  className="px-8 py-3.5 bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold rounded-xl transition-all duration-300 border border-slate-700/80 hover:border-teal-500/50 backdrop-blur-md text-center hover:-translate-y-0.5 shadow-md"
+                >
+                  Access Dashboard
+                </Link>
+              </div>
+
+              {/* Feature Highlights Pills */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-6 border-t border-slate-800/80 w-full animate-page-enter animate-delay-400">
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-300 font-medium">
+                  <div className="w-2 h-2 rounded-full bg-teal-400 shadow-[0_0_8px_#2dd4bf]" />
+                  24/7 AI Diagnostic
+                </div>
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-300 font-medium">
+                  <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#38bdf8]" />
+                  Instant Appointments
+                </div>
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-300 font-medium col-span-2 sm:col-span-1">
+                  <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+                  HIPAA Secured Data
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Futuristic Glowing AI Digital Brain Graphic */}
+            <div className="lg:col-span-5 relative flex items-center justify-center mt-6 lg:mt-0">
+              
+              {/* Outer Neon Aura Glowing Base */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/20 via-cyan-400/25 to-blue-600/10 rounded-full blur-3xl transform scale-90 lg:scale-110 pointer-events-none animate-pulse" />
+
+              {/* AI Brain Holographic Card Container */}
+              <div className="relative w-full max-w-[460px] aspect-square flex items-center justify-center rounded-3xl p-6 bg-slate-900/60 border border-teal-500/30 backdrop-blur-xl shadow-[0_0_50px_rgba(20,184,166,0.25)] group hover:border-teal-400/60 transition-all duration-500">
+                
+                {/* Glowing Concentric Target Rings */}
+                <div className="absolute inset-3 rounded-2xl border border-teal-500/20 pointer-events-none" />
+                <div className="absolute inset-8 rounded-full border border-cyan-400/20 border-dashed animate-spin-slow pointer-events-none" />
+                <div className="absolute inset-16 rounded-full border border-teal-300/15 pointer-events-none" />
+
+                {/* SVG Digital AI Brain / Neural Network Visual */}
+                <div className="relative w-full h-full flex items-center justify-center drop-shadow-[0_0_25px_rgba(20,184,166,0.5)]">
+                  <svg
+                    viewBox="0 0 500 500"
+                    className="w-full h-full max-w-[380px] max-h-[380px] animate-float"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <defs>
+                      <linearGradient id="brainGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0.9" />
+                        <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.8" />
+                        <stop offset="100%" stopColor="#818cf8" stopOpacity="0.7" />
+                      </linearGradient>
+                      <linearGradient id="synapseLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#14b8a6" stopOpacity="0.2" />
+                        <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.9" />
+                        <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0.2" />
+                      </linearGradient>
+                      <filter id="neonShadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="8" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                      </filter>
+                    </defs>
+
+                    {/* Left Hemisphere Neural Cortex Paths */}
+                    <g filter="url(#neonShadow)" stroke="url(#brainGlow)" strokeWidth="2.5" strokeLinecap="round">
+                      {/* Frontal & Temporal Lobe Circuits */}
+                      <path d="M 230 110 C 170 100 120 140 110 200 C 100 250 120 300 150 330 C 180 360 220 370 240 370" className="tech-network__brain-path" />
+                      <path d="M 220 130 C 180 130 145 160 140 210 C 135 250 155 285 180 310" className="tech-network__brain-path animate-delay-100" />
+                      <path d="M 230 160 C 195 160 170 185 165 220 C 160 255 180 280 210 295" className="tech-network__brain-path animate-delay-200" />
+                      
+                      {/* Internal Synapse Interconnects */}
+                      <path d="M 140 210 L 190 200 L 220 250 L 175 270 L 210 295" strokeWidth="1.5" strokeDasharray="4 4" className="tech-network__lines" />
+                      <path d="M 180 140 L 210 180 L 165 220 L 230 220 L 220 330" strokeWidth="1.5" />
+                    </g>
+
+                    {/* Right Hemisphere Neural Cortex Paths */}
+                    <g filter="url(#neonShadow)" stroke="url(#brainGlow)" strokeWidth="2.5" strokeLinecap="round">
+                      {/* Parietal & Occipital Lobe Circuits */}
+                      <path d="M 270 110 C 330 100 380 140 390 200 C 400 250 380 300 350 330 C 320 360 280 370 260 370" className="tech-network__brain-path" />
+                      <path d="M 280 130 C 320 130 355 160 360 210 C 365 250 345 285 320 310" className="tech-network__brain-path animate-delay-100" />
+                      <path d="M 270 160 C 305 160 330 185 335 220 C 340 255 320 280 290 295" className="tech-network__brain-path animate-delay-200" />
+
+                      {/* Internal Synapse Interconnects */}
+                      <path d="M 360 210 L 310 200 L 280 250 L 325 270 L 290 295" strokeWidth="1.5" strokeDasharray="4 4" className="tech-network__lines" />
+                      <path d="M 320 140 L 290 180 L 335 220 L 270 220 L 280 330" strokeWidth="1.5" />
+                    </g>
+
+                    {/* Central Brain Stem & Corpus Callosum AI Bridge */}
+                    <g stroke="url(#synapseLine)" strokeWidth="2">
+                      <line x1="230" y1="160" x2="270" y2="160" />
+                      <line x1="210" y1="200" x2="290" y2="200" />
+                      <line x1="220" y1="250" x2="280" y2="250" />
+                      <line x1="210" y1="295" x2="290" y2="295" />
+                      <line x1="240" y1="370" x2="260" y2="370" />
+                      <path d="M 250 370 L 250 430" stroke="#38bdf8" strokeWidth="3" strokeDasharray="6 6" className="animate-pulse" />
+                    </g>
+
+                    {/* Neural Synapse Nodes (Glowing Dots) */}
+                    <g fill="#2dd4bf" filter="url(#neonShadow)">
+                      <circle cx="250" cy="110" r="5" className="animate-ping" />
+                      <circle cx="230" cy="110" r="4" />
+                      <circle cx="270" cy="110" r="4" />
+                      <circle cx="140" cy="210" r="4.5" />
+                      <circle cx="360" cy="210" r="4.5" />
+                      <circle cx="190" cy="200" r="3.5" />
+                      <circle cx="310" cy="200" r="3.5" />
+                      <circle cx="220" cy="250" r="5" fill="#38bdf8" />
+                      <circle cx="280" cy="250" r="5" fill="#38bdf8" />
+                      <circle cx="175" cy="270" r="3.5" />
+                      <circle cx="325" cy="270" r="3.5" />
+                      <circle cx="150" cy="330" r="4" />
+                      <circle cx="350" cy="330" r="4" />
+                      <circle cx="250" cy="250" r="7" fill="#67e8f9" className="animate-pulse" />
+                    </g>
+
+                    {/* Orbiting Matrix Data Streams / Floating Nodes */}
+                    <g fill="#38bdf8" opacity="0.8">
+                      <circle cx="80" cy="180" r="2.5" className="animate-ping" />
+                      <circle cx="420" cy="180" r="2.5" className="animate-ping animate-delay-300" />
+                      <circle cx="90" cy="310" r="3" />
+                      <circle cx="410" cy="310" r="3" />
+                      <circle cx="250" cy="70" r="3.5" fill="#2dd4bf" />
+                    </g>
+                  </svg>
+                </div>
+
+                {/* Floating Holographic Status Cards */}
+                
+                {/* Top-Right Badge: AI Health Engine Active */}
+                <div className="absolute -top-3 -right-3 sm:top-4 sm:right-4 px-3.5 py-2 rounded-xl bg-slate-900/90 border border-teal-400/40 text-xs font-semibold text-teal-200 backdrop-blur-md shadow-[0_0_20px_rgba(20,184,166,0.3)] flex items-center gap-2 animate-float">
+                  <div className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse shadow-[0_0_8px_#2dd4bf]" />
+                  <span>Gemini AI Health Core</span>
+                </div>
+
+                {/* Bottom-Left Badge: Real-Time Diagnostic Accuracy */}
+                <div className="absolute -bottom-3 -left-3 sm:bottom-4 sm:left-4 px-3.5 py-2 rounded-xl bg-slate-900/90 border border-cyan-400/40 text-xs font-semibold text-cyan-200 backdrop-blur-md shadow-[0_0_20px_rgba(56,189,248,0.3)] flex items-center gap-2 animate-float animate-delay-300">
+                  <svg className="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>99.4% Diagnostic Accuracy</span>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
