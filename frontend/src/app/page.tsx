@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { HeroSection } from '@/components/hero-section';
 import { Activity, ShieldCheck, Heart, Calendar, Pill, Stethoscope, ArrowRight, Bot } from 'lucide-react';
 
 const FEATURES = [
@@ -90,125 +91,8 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-slate-100 to-teal-50 dark:from-slate-950 dark:via-slate-900 dark:to-teal-950 pt-16 pb-24 px-6 sm:px-8 lg:px-12 transition-colors duration-200">
-        {/* Ambient Orbs */}
-        <div className="absolute top-1/4 left-10 w-96 h-96 bg-teal-500/10 dark:bg-teal-500/15 rounded-full blur-3xl pointer-events-none -translate-y-1/2 animate-float" />
-        <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-cyan-500/10 dark:bg-cyan-500/15 rounded-full blur-3xl pointer-events-none animate-float animate-delay-300" />
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            
-            {/* Left Column - Hero Text */}
-            <div className="lg:col-span-7 flex flex-col items-start text-left pt-4 lg:pt-0">
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-teal-500/10 border border-teal-500/30 text-xs sm:text-sm font-semibold text-teal-700 dark:text-teal-300 mb-6 backdrop-blur-md shadow-sm">
-                <span className="w-2.5 h-2.5 rounded-full bg-teal-500 animate-pulse" />
-                Production-Grade Healthcare Platform
-              </div>
-
-              <h1 className="hero-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] mb-6">
-                Next-Generation{' '}
-                <span className="bg-gradient-to-r from-teal-600 via-cyan-600 to-teal-500 dark:from-teal-300 dark:via-cyan-200 dark:to-teal-400 bg-clip-text text-transparent">
-                  Healthcare
-                </span>{' '}
-                for Everyone
-              </h1>
-
-              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed mb-8">
-                Monitor real-time health metrics, schedule doctor consultations, automate medicine reminders with OCR scanning, and unlock AI health risk assessment — all in one unified, secure platform.
-              </p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-10">
-                <Link
-                  href="/register"
-                  className="px-8 py-3.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-md hover:-translate-y-0.5 text-center flex items-center justify-center gap-2 text-sm"
-                >
-                  Start Free Patient Trial
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/dashboard/patient"
-                  className="px-8 py-3.5 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold rounded-xl transition-all duration-200 border border-slate-200 dark:border-slate-700 text-center hover:-translate-y-0.5 text-sm shadow-sm"
-                >
-                  Explore Patient Dashboard
-                </Link>
-              </div>
-
-              {/* Feature Highlights Pills */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-6 border-t border-slate-200 dark:border-slate-800 w-full">
-                <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium">
-                  <div className="w-2 h-2 rounded-full bg-teal-500" />
-                  AI Diagnostic Engine
-                </div>
-                <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium">
-                  <div className="w-2 h-2 rounded-full bg-cyan-500" />
-                  Real-Time Vitals Sync
-                </div>
-                <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium col-span-2 sm:col-span-1">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                  Patient Monitoring Grid
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column - Refactored Realistic AI Digital Brain Graphic */}
-            <div className="lg:col-span-5 relative flex items-center justify-center mt-6 lg:mt-0">
-              
-              {/* Outer Neon Aura Glowing Base */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/20 via-cyan-400/20 to-blue-500/10 rounded-full blur-3xl transform scale-90 lg:scale-110 pointer-events-none animate-pulse" />
-
-              {/* AI Brain Holographic Card Container */}
-              <div className="relative w-full max-w-[460px] aspect-square flex items-center justify-center rounded-3xl p-6 bg-white/70 dark:bg-slate-900/60 border border-teal-500/30 backdrop-blur-xl shadow-2xl group transition-all duration-500">
-                
-                {/* SVG Visual */}
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <svg
-                    viewBox="0 0 500 500"
-                    className="w-full h-full max-w-[360px] max-h-[360px] animate-float"
-                    fill="none"
-                  >
-                    <defs>
-                      <linearGradient id="brainGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#14b8a6" stopOpacity="0.9" />
-                        <stop offset="50%" stopColor="#0284c7" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.7" />
-                      </linearGradient>
-                    </defs>
-
-                    <g stroke="url(#brainGlow)" strokeWidth="2.5" strokeLinecap="round">
-                      <path d="M 230 110 C 170 100 120 140 110 200 C 100 250 120 300 150 330 C 180 360 220 370 240 370" />
-                      <path d="M 270 110 C 330 100 380 140 390 200 C 400 250 380 300 350 330 C 320 360 280 370 260 370" />
-                    </g>
-                    <g fill="#14b8a6">
-                      <circle cx="250" cy="110" r="5" className="animate-ping" />
-                      <circle cx="140" cy="210" r="5" />
-                      <circle cx="360" cy="210" r="5" />
-                      <circle cx="250" cy="250" r="7" className="animate-pulse" />
-                    </g>
-                  </svg>
-                </div>
-
-                {/* Floating Realistic Healthcare Badges (REPLACED SCI-FI PLACEHOLDERS) */}
-                
-                {/* Top-Right Badge: AI Diagnostic Engine */}
-                <div className="absolute -top-3 -right-3 sm:top-3 sm:right-3 px-3.5 py-2 rounded-xl bg-white/90 dark:bg-slate-900/90 border border-teal-500/40 text-xs font-semibold text-teal-800 dark:text-teal-200 backdrop-blur-md shadow-lg flex items-center gap-2 animate-float">
-                  <div className="w-2.5 h-2.5 rounded-full bg-teal-500 animate-pulse" />
-                  <span>AI Diagnostic Engine</span>
-                </div>
-
-                {/* Bottom-Left Badge: Real-Time Vitals Sync */}
-                <div className="absolute -bottom-3 -left-3 sm:bottom-3 sm:left-3 px-3.5 py-2 rounded-xl bg-white/90 dark:bg-slate-900/90 border border-cyan-500/40 text-xs font-semibold text-cyan-800 dark:text-cyan-200 backdrop-blur-md shadow-lg flex items-center gap-2 animate-float animate-delay-300">
-                  <Activity className="w-4 h-4 text-cyan-500 animate-pulse" />
-                  <span>Real-Time Vitals Sync</span>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
+      {/* Hero Section Component */}
+      <HeroSection />
 
       {/* Stats Section */}
       <section className="py-10 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
