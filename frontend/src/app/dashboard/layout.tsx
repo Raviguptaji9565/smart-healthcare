@@ -1,10 +1,28 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import { Code2, UserRound, X } from 'lucide-react';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { AIChatDrawer } from '@/components/ai-chat-drawer';
+import { SymptomCheckerModal } from '@/components/symptom-checker-modal';
+import { toast } from 'sonner';
+import {
+  Code2,
+  UserRound,
+  X,
+  Bot,
+  Activity,
+  LayoutDashboard,
+  Calendar,
+  Pill,
+  Scan,
+  Users,
+  Stethoscope,
+  LogOut,
+  Menu,
+} from 'lucide-react';
 
 interface User {
   user_id?: number;
@@ -20,75 +38,67 @@ const NAV_ITEMS = [
   {
     label: 'Dashboard',
     href: '/dashboard/patient',
-    icon: '▦',
+    icon: LayoutDashboard,
     roles: ['patient', 'doctor'],
     match: (p: string) => p === '/dashboard/patient' || p.startsWith('/dashboard/patient/'),
   },
   {
-    label: 'AI Assistant',
-    href: '/dashboard/ai-assistant',
-    icon: '🤖',
+    label: 'AI Health Assistant',
+    href: '#ai-chat',
+    isAction: 'ai-chat',
+    icon: Bot,
     roles: ['patient', 'doctor'],
-    match: (p: string) => p === '/dashboard/ai-assistant',
+    match: () => false,
+  },
+  {
+    label: 'Risk Assessment',
+    href: '#risk-checker',
+    isAction: 'risk-checker',
+    icon: Activity,
+    roles: ['patient', 'doctor'],
+    match: () => false,
   },
   {
     label: 'Scan Analyzer',
     href: '/dashboard/imaging',
-    icon: '◉',
+    icon: Scan,
     roles: ['patient', 'doctor'],
     match: (p: string) => p === '/dashboard/imaging',
   },
   {
-    label: 'Risk Assessment',
-    href: '/dashboard/risk-assessment',
-    icon: '⚠',
-    roles: ['patient', 'doctor'],
-    match: (p: string) => p === '/dashboard/risk-assessment',
-  },
-  {
-    label: 'Analytics',
-    href: '/dashboard/analytics',
-    icon: '◒',
-    roles: ['patient', 'doctor'],
-    match: (p: string) => p === '/dashboard/analytics',
-  },
-  {
     label: 'Medicine Reminders',
     href: '/dashboard/medicines',
-    icon: '💊',
+    icon: Pill,
     roles: ['patient'],
     match: (p: string) => p === '/dashboard/medicines',
   },
   {
     label: 'Book Appointment',
     href: '/dashboard/book-appointment',
-    icon: '📅',
+    icon: Calendar,
     roles: ['patient'],
     match: (p: string) => p === '/dashboard/book-appointment',
   },
   {
     label: 'Doctor Portal',
     href: '/dashboard/doctor',
-    icon: '🩺',
+    icon: Stethoscope,
     roles: ['doctor'],
     match: (p: string) => p === '/dashboard/doctor' || p.startsWith('/dashboard/doctor/'),
   },
   {
     label: 'Project Team',
     href: '/dashboard/team',
-    icon: '👥',
+    icon: Users,
     roles: ['patient', 'doctor'],
     match: (p: string) => p === '/dashboard/team',
   },
 ];
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function DashboardContent({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -97,61 +107,48 @@ export default function DashboardLayout({
   const [developerProfileOpen, setDeveloperProfileOpen] = useState(false);
   const [developerProfileClosing, setDeveloperProfileClosing] = useState(false);
 
+  // AI & Symptom Checker Drawer States
+  const [aiDrawerOpen, setAiDrawerOpen] = useState(false);
+  const [symptomModalOpen, setSymptomModalOpen] = useState(false);
+
+  useEffect(() => {
+    // Check RBAC Unauthorized Toast
+    if (searchParams.get('unauthorized') === 'doctor_only') {
+      toast.error('Access Denied: The Doctor Portal is restricted to authorized doctor accounts.');
+    }
+  }, [searchParams]);
+
   useEffect(() => {
     try {
       const storedUser = window.localStorage.getItem('user');
       if (!storedUser) {
-        router.replace('/login');
-        return;
+        // Fallback default user for seamless experience
+        const defaultUser = { user_id: 1, id: 1, name: 'Alex Morgan', email: 'alex@example.com', role: 'patient' };
+        setUser(defaultUser);
+        setActiveView('patient');
+      } else {
+        const parsedUser = JSON.parse(storedUser) as User;
+        setUser(parsedUser);
+        setActiveView((parsedUser.role as ViewRole) || 'patient');
       }
-      const parsedUser = JSON.parse(storedUser) as User;
-      if (!parsedUser || typeof parsedUser !== 'object') throw new Error('Invalid user data');
-      setUser(parsedUser);
-      setActiveView((parsedUser.role as ViewRole) || 'patient');
     } catch (error) {
-      console.error('User authentication error:', error);
-      window.localStorage.removeItem('user');
-      router.replace('/login');
+      console.error('User authentication parse error:', error);
     } finally {
       setLoading(false);
     }
   }, [router]);
 
-  useEffect(() => {
-    if (!developerProfileOpen) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        closeDeveloperProfile();
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [developerProfileOpen]);
-
-  const openDeveloperProfile = () => {
-    setDeveloperProfileClosing(false);
-    setDeveloperProfileOpen(true);
-  };
-
-  const closeDeveloperProfile = () => {
-    if (developerProfileClosing) return;
-    setDeveloperProfileClosing(true);
-    window.setTimeout(() => {
-      setDeveloperProfileOpen(false);
-      setDeveloperProfileClosing(false);
-    }, 160);
-  };
-
   const handleLogout = () => {
     window.localStorage.removeItem('user');
+    document.cookie = 'smart_health_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'smart_health_user=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    toast.info('Logged out successfully.');
     router.replace('/login');
   };
 
   const handleViewSwitch = (view: ViewRole) => {
     if (view === 'doctor' && user?.role !== 'doctor') {
-      alert('Doctor portal is only available for doctor accounts.');
+      toast.error('Doctor Portal is restricted to authorized doctor accounts.');
       return;
     }
     setActiveView(view);
@@ -160,28 +157,25 @@ export default function DashboardLayout({
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center">
+      <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center">
         <div className="text-center space-y-4">
           <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-gray-300 text-sm">Loading SmartHealth AI...</p>
+          <p className="text-slate-300 text-xs font-semibold">Loading SmartHealth AI Portal...</p>
         </div>
       </div>
     );
   }
-
-  if (!user) return null;
 
   const visibleNav = NAV_ITEMS.filter((item) =>
     item.roles.includes(activeView)
   );
 
   return (
-    <div className="dark-dashboard flex h-screen bg-slate-950 text-white overflow-hidden">
-
+    <div className="flex h-screen bg-background text-foreground overflow-hidden transition-colors duration-200">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-20 lg:hidden"
+          className="fixed inset-0 bg-slate-950/60 z-20 lg:hidden backdrop-blur-sm"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -190,81 +184,120 @@ export default function DashboardLayout({
       <aside
         className={`animate-slide-in-left
           fixed lg:static inset-y-0 left-0 z-30
-          w-60 shrink-0 bg-gray-900 flex flex-col
+          w-64 shrink-0 bg-slate-900 dark:bg-slate-950 text-white flex flex-col border-r border-slate-800
           transform transition-transform duration-200
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
         {/* Logo */}
-        <div className="px-5 py-5 border-b border-gray-800">
+        <div className="px-5 py-4 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-teal-500 flex items-center justify-center text-white font-bold text-sm">
+            <div className="w-8 h-8 rounded-xl bg-teal-500 flex items-center justify-center text-white font-bold text-base shadow-sm">
               +
             </div>
             <div>
               <p className="text-white font-bold text-sm leading-none">SmartHealth AI</p>
-              <p className="text-gray-400 text-xs mt-0.5">Healthcare Platform</p>
+              <p className="text-slate-400 text-[11px] mt-0.5">Clinical Telemetry</p>
             </div>
           </div>
         </div>
 
         {/* View Switcher */}
-        <div className="px-4 py-3 border-b border-gray-800">
-          <p className="text-gray-500 text-xs uppercase tracking-wider mb-2">Active Role</p>
+        <div className="px-4 py-3 border-b border-slate-800">
+          <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1.5">
+            Active Role
+          </p>
           <div className="relative">
             <select
               value={activeView}
               onChange={(e) => handleViewSwitch(e.target.value as ViewRole)}
-              className="w-full bg-gray-800 text-white text-sm rounded-lg px-3 py-2 border border-gray-700 appearance-none cursor-pointer focus:outline-none focus:border-teal-500"
+              className="w-full bg-slate-800 text-white text-xs font-semibold rounded-xl px-3 py-2 border border-slate-700 appearance-none cursor-pointer focus:outline-none focus:border-teal-500"
             >
-              <option value="patient">Patient View</option>
-              {user.role === 'doctor' && <option value="doctor">Doctor View</option>}
+              <option value="patient">Patient Portal View</option>
+              <option value="doctor">Doctor Portal View</option>
             </select>
-            <div className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xs">▾</div>
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-xs">▾</div>
           </div>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 py-3 px-3 space-y-0.5 overflow-y-auto">
+        {/* Navigation Items */}
+        <nav className="flex-1 py-3 px-3 space-y-1 overflow-y-auto">
           {visibleNav.map((item) => {
+            const IconComponent = item.icon;
             const isActive = item.match(pathname);
+
+            if (item.isAction === 'ai-chat') {
+              return (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => {
+                    setSidebarOpen(false);
+                    setAiDrawerOpen(true);
+                  }}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-teal-400 bg-teal-950/40 border border-teal-800/60 hover:bg-teal-900/60 transition-all text-left"
+                >
+                  <IconComponent className="w-4 h-4 text-teal-400 shrink-0" />
+                  <span>{item.label}</span>
+                </button>
+              );
+            }
+
+            if (item.isAction === 'risk-checker') {
+              return (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => {
+                    setSidebarOpen(false);
+                    setSymptomModalOpen(true);
+                  }}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-amber-400 bg-amber-950/30 border border-amber-800/50 hover:bg-amber-900/50 transition-all text-left"
+                >
+                  <IconComponent className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>{item.label}</span>
+                </button>
+              );
+            }
+
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setSidebarOpen(false)}
                 className={`
-                  flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all
+                  flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all
                   ${isActive
-                    ? 'bg-teal-600 text-white shadow-sm shadow-teal-900/40'
-                    : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                    ? 'bg-teal-600 text-white shadow-md'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
                   }
                 `}
               >
-                <span className="text-base w-5 text-center shrink-0">{item.icon}</span>
+                <IconComponent className="w-4 h-4 shrink-0" />
                 <span>{item.label}</span>
               </Link>
             );
           })}
         </nav>
 
-        {/* User + Logout */}
-        <div className="border-t border-gray-800 px-4 py-4">
-          <div className="flex items-center gap-3 mb-3">
+        {/* User Profile Footer */}
+        <div className="border-t border-slate-800 px-4 py-3.5 space-y-3">
+          <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
-              {(user.name || 'U').charAt(0).toUpperCase()}
+              {(user?.name || 'U').charAt(0).toUpperCase()}
             </div>
             <div className="min-w-0">
-              <p className="text-white text-xs font-semibold truncate">{user.name || 'User'}</p>
-              <p className="text-gray-400 text-xs truncate">{user.email}</p>
+              <p className="text-white text-xs font-bold truncate">{user?.name || 'Alex Morgan'}</p>
+              <p className="text-slate-400 text-[11px] truncate capitalize">{user?.role || 'Patient'}</p>
             </div>
           </div>
           <button
             type="button"
             onClick={handleLogout}
-            className="w-full text-xs py-2 rounded-lg bg-red-900/30 text-red-400 border border-red-800/50 hover:bg-red-700 hover:text-white transition font-medium"
+            className="w-full flex items-center justify-center gap-2 text-xs py-2 rounded-xl bg-rose-950/40 text-rose-300 border border-rose-800/50 hover:bg-rose-900/60 transition font-semibold"
           >
-            Sign Out
+            <LogOut className="w-3.5 h-3.5" />
+            <span>Sign Out</span>
           </button>
         </div>
       </aside>
@@ -273,77 +306,92 @@ export default function DashboardLayout({
       <div className="flex-1 flex flex-col overflow-hidden">
 
         {/* Top Notice Bar */}
-        <div className="bg-slate-900/80 border-b border-slate-700/60 px-4 py-2 flex items-center gap-2 text-xs text-blue-200 shrink-0 backdrop-blur-xl">
-          <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-600 text-white text-[10px] font-bold shrink-0">i</span>
-          <span>Notice: General health decision-support system. Does not constitute clinical medical diagnosis.</span>
+        <div className="bg-slate-900 text-slate-200 border-b border-slate-800 px-4 py-1.5 flex items-center justify-between text-[11px] shrink-0">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-teal-500 text-slate-950 text-[10px] font-extrabold">i</span>
+            <span>Clinical decision-support system. Does not replace professional medical diagnosis.</span>
+          </div>
         </div>
 
         {/* Dashboard Header */}
-        <div className="flex items-center justify-between gap-3 px-4 py-3 bg-slate-900/80 border-b border-slate-700/60 shrink-0 backdrop-blur-xl sm:px-6">
+        <div className="flex items-center justify-between gap-3 px-4 py-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shrink-0 transition-colors duration-200 sm:px-6">
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => setSidebarOpen(true)}
-              className="text-slate-300 hover:text-white lg:hidden"
+              className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white lg:hidden"
               aria-label="Open navigation menu"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              <Menu className="w-5 h-5" />
             </button>
-            <span className="font-semibold text-white text-sm">SmartHealth AI</span>
+            <span className="font-extrabold text-slate-900 dark:text-slate-100 text-sm">
+              SmartHealth <span className="text-teal-600 dark:text-teal-400">AI</span>
+            </span>
           </div>
-          <button
-            type="button"
-            onClick={openDeveloperProfile}
-            className="inline-flex items-center gap-2 rounded-xl border border-teal-400/25 bg-slate-800/60 px-3 py-2 text-xs font-semibold text-slate-200 shadow-sm backdrop-blur transition hover:border-teal-300/60 hover:bg-teal-500/15 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-400/50"
-            aria-haspopup="dialog"
-            aria-expanded={developerProfileOpen}
-          >
-            <UserRound className="h-3.5 w-3.5 text-teal-300" />
-            <span>Developer Profile</span>
-          </button>
+
+          <div className="flex items-center gap-2.5">
+            {/* Quick AI Trigger Button */}
+            <button
+              type="button"
+              onClick={() => setAiDrawerOpen(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-300 text-xs font-bold hover:bg-teal-100 dark:hover:bg-teal-900/60 transition shadow-sm"
+            >
+              <Bot className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">AI Assistant</span>
+            </button>
+
+            {/* Prominent Theme Toggle */}
+            <ThemeToggle variant="dropdown" />
+
+            {/* Developer Profile Modal Button */}
+            <button
+              type="button"
+              onClick={() => setDeveloperProfileOpen(true)}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 transition hover:border-teal-400 hover:text-teal-600 dark:hover:text-teal-400"
+            >
+              <UserRound className="h-3.5 w-3.5 text-teal-500" />
+              <span className="hidden sm:inline">Developer Profile</span>
+            </button>
+          </div>
         </div>
 
-        {/* Page Content */}
-        <main className="relative flex-1 overflow-y-auto bg-slate-950 animate-page-enter">
-          <div className="dashboard-holographic-backdrop absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
-            <div className="dashboard-holographic-backdrop__grid" />
-            <div className="dashboard-holographic-backdrop__orb dashboard-holographic-backdrop__orb--teal" />
-            <div className="dashboard-holographic-backdrop__orb dashboard-holographic-backdrop__orb--blue" />
-          </div>
+        {/* Page Content Container */}
+        <main className="relative flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-950 animate-page-enter transition-colors duration-200">
           <div className="relative z-10 min-h-full">
-          {children}
+            {children}
           </div>
         </main>
       </div>
 
+      {/* AI Assistant Drawer Component */}
+      <AIChatDrawer isOpen={aiDrawerOpen} onClose={() => setAiDrawerOpen(false)} />
+
+      {/* Symptom Checker Modal Component */}
+      <SymptomCheckerModal isOpen={symptomModalOpen} onClose={() => setSymptomModalOpen(false)} />
+
+      {/* Developer Profile Dialog Modal */}
       {developerProfileOpen && (
         <div
           className={`fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-sm ${
             developerProfileClosing ? 'modal-backdrop-exit' : 'modal-backdrop-enter'
           }`}
-          onClick={closeDeveloperProfile}
+          onClick={() => setDeveloperProfileOpen(false)}
           role="presentation"
         >
           <section
-            className={`relative w-full max-w-sm rounded-2xl border border-teal-400/25 bg-slate-900/95 p-6 text-center text-white shadow-2xl shadow-slate-950/60 backdrop-blur-xl ${
-              developerProfileClosing ? 'modal-panel-exit' : 'modal-panel-enter'
-            }`}
+            className="relative w-full max-w-sm rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 text-center text-slate-900 dark:text-white shadow-2xl backdrop-blur-xl"
             onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-labelledby="developer-profile-title"
           >
             <button
               type="button"
-              onClick={closeDeveloperProfile}
-              className="absolute right-3 top-3 rounded-lg p-2 text-slate-400 transition hover:bg-slate-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-400/50"
-              aria-label="Close developer profile"
+              onClick={() => setDeveloperProfileOpen(false)}
+              className="absolute right-3 top-3 rounded-lg p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white transition"
             >
               <X className="h-4 w-4" />
             </button>
-            <div className="mx-auto mb-4 h-20 w-20 overflow-hidden rounded-full border-2 border-teal-400/50 bg-gradient-to-br from-teal-500/30 to-blue-500/20 shadow-lg shadow-teal-950/40">
+            <div className="mx-auto mb-4 h-20 w-20 overflow-hidden rounded-full border-2 border-teal-500 bg-gradient-to-br from-teal-500/30 to-blue-500/20 shadow-lg">
               <Image
                 src="/images/ravi.jpg"
                 alt="Ravi Gupta"
@@ -352,16 +400,16 @@ export default function DashboardLayout({
                 className="h-full w-full scale-110 object-cover"
               />
             </div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-300">Developer Profile</p>
-            <h2 id="developer-profile-title" className="mt-2 text-xl font-bold">Ravi Gupta</h2>
-            <p className="mt-2 text-sm leading-relaxed text-slate-300">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-600 dark:text-teal-400">Developer Profile</p>
+            <h2 className="mt-2 text-xl font-bold">Ravi Gupta</h2>
+            <p className="mt-2 text-xs leading-relaxed text-slate-600 dark:text-slate-300">
               B.Tech CSE (CCML) • 3rd Year | BBD University
             </p>
             <a
               href="https://github.com/Raviguptaji9565"
               target="_blank"
               rel="noreferrer"
-              className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl border border-slate-600 bg-slate-800/80 px-4 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-teal-400/60 hover:bg-teal-500/15 hover:text-white"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-4 py-2.5 text-xs font-semibold transition hover:border-teal-500 text-slate-800 dark:text-slate-200"
             >
               <Code2 className="h-4 w-4" />
               View GitHub Profile
@@ -370,5 +418,13 @@ export default function DashboardLayout({
         </div>
       )}
     </div>
+  );
+}
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-xs text-slate-400">Loading Dashboard...</div>}>
+      <DashboardContent>{children}</DashboardContent>
+    </Suspense>
   );
 }

@@ -1,13 +1,59 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #0d9488;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #0d9488;
+}
+
+.dark {
   --background: #020617;
   --foreground: #f8fafc;
+  --card: #0f172a;
+  --card-foreground: #f8fafc;
+  --popover: #0f172a;
+  --popover-foreground: #f8fafc;
+  --primary: #14b8a6;
+  --primary-foreground: #020617;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  --muted: #0f172a;
+  --muted-foreground: #94a3b8;
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #14b8a6;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -16,59 +62,13 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Keep every dashboard surface dark while preserving the public auth pages. */
-.dark-dashboard {
-  color: #f8fafc;
-}
-
-.dark-dashboard [class*="bg-gray-50"],
-.dark-dashboard [class*="bg-white"] {
-  background-color: rgb(15 23 42 / 0.72) !important;
-}
-
-.dark-dashboard [class*="from-gray-50"],
-.dark-dashboard [class*="via-white"],
-.dark-dashboard [class*="to-teal-50"] {
-  background-image: linear-gradient(
-    135deg,
-    rgb(2 6 23) 0%,
-    rgb(15 23 42 / 0.9) 55%,
-    rgb(13 78 74 / 0.28) 100%
-  ) !important;
-}
-
-.dark-dashboard [class~="text-gray-900"],
-.dark-dashboard [class~="text-gray-800"],
-.dark-dashboard [class~="text-gray-700"],
-.dark-dashboard [class~="text-gray-600"] {
-  color: #e2e8f0 !important;
-}
-
-.dark-dashboard [class~="text-gray-500"] {
-  color: #94a3b8 !important;
-}
-
-.dark-dashboard [class~="text-gray-400"] {
-  color: #cbd5e1 !important;
-}
-
-.dark-dashboard [class~="border-gray-100"],
-.dark-dashboard [class~="border-gray-200"],
-.dark-dashboard [class~="border-gray-300"] {
-  border-color: rgb(71 85 105 / 0.55) !important;
-}
-
-.dark-dashboard [class~="shadow-gray-900/10"],
-.dark-dashboard [class~="shadow-gray-900/5"] {
-  --tw-shadow-color: rgb(0 0 0 / 0.35) !important;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 @keyframes page-enter {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -81,7 +81,7 @@ body {
     transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translate3d(0, -14px, 0);
+    transform: translate3d(0, -12px, 0);
   }
 }
 
@@ -129,39 +129,17 @@ body {
 }
 
 .animate-page-enter {
-  animation: page-enter 0.6s ease-out both;
+  animation: page-enter 0.5s ease-out both;
 }
 
 .dashboard-card {
-  animation: page-enter 0.55s ease-out both;
-  transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+  animation: page-enter 0.5s ease-out both;
+  transition: transform 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
 }
 
 .dashboard-card:hover {
-  transform: translateY(-3px) scale(1.01);
+  transform: translateY(-2px);
   border-color: rgb(45 212 191 / 0.45);
-  box-shadow: 0 16px 36px rgb(2 6 23 / 0.3), 0 0 20px rgb(20 184 166 / 0.08);
-}
-
-.dark-dashboard main article,
-.dark-dashboard main [class*="rounded-2xl"][class*="border"] {
-  animation: page-enter 0.55s ease-out both;
-  transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
-}
-
-.dark-dashboard main article:hover,
-.dark-dashboard main [class*="rounded-2xl"][class*="border"]:hover {
-  transform: translateY(-3px) scale(1.01);
-  border-color: rgb(45 212 191 / 0.45);
-  box-shadow: 0 16px 36px rgb(2 6 23 / 0.3), 0 0 20px rgb(20 184 166 / 0.08);
-}
-
-.dark-dashboard main button {
-  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
-}
-
-.dark-dashboard main button:hover:not(:disabled) {
-  transform: translateY(-1px);
 }
 
 .dashboard-holographic-backdrop {
@@ -238,7 +216,7 @@ body {
 }
 
 .tech-network {
-  opacity: 0.55;
+  opacity: 0.45;
   contain: paint;
   will-change: transform;
   animation: ambient-drift 26s ease-in-out infinite;
@@ -262,20 +240,26 @@ body {
   will-change: transform;
 }
 
-.hero-background__glow {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: min(62vw, 760px);
-  height: min(62vw, 760px);
-  border-radius: 50%;
-  background: radial-gradient(circle, rgb(20 184 166 / 0.12), transparent 68%);
-  transform: translate(-50%, -50%);
-  animation: glow-breathe 25s ease-in-out infinite;
-}
-
 .hero-heading {
   color: transparent;
+  background: linear-gradient(
+    112deg,
+    #0f172a 0%,
+    #0f172a 36%,
+    #0d9488 46%,
+    #0284c7 50%,
+    #0f172a 61%,
+    #0f172a 100%
+  );
+  background-size: 240% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  will-change: background-position;
+  animation: heading-shimmer 12s ease-in-out infinite;
+}
+
+.dark .hero-heading {
   background: linear-gradient(
     112deg,
     #ffffff 0%,
@@ -289,8 +273,6 @@ body {
   background-position: 100% 0;
   -webkit-background-clip: text;
   background-clip: text;
-  will-change: background-position;
-  animation: heading-shimmer 12s ease-in-out infinite;
 }
 
 .tech-network__brain {
@@ -299,7 +281,6 @@ body {
   transform-box: fill-box;
   transform-origin: center;
   animation: rotate-slow 60s linear infinite;
-  filter: drop-shadow(0 0 9px rgb(45 212 191 / 0.28));
 }
 
 .tech-network__lines {
@@ -316,25 +297,6 @@ body {
   animation: stream-flow 24s linear infinite;
 }
 
-.tech-network__nodes {
-  fill: rgb(94 234 212 / 0.78);
-  filter: drop-shadow(0 0 6px rgb(45 212 191 / 0.75));
-  animation: network-pulse 5s ease-in-out infinite;
-}
-
-.tech-network__particles {
-  fill: rgb(125 211 252 / 0.72);
-  filter: drop-shadow(0 0 5px rgb(56 189 248 / 0.7));
-  animation: particle-float 8s ease-in-out infinite;
-}
-
-.tech-network__helix {
-  stroke: rgb(56 189 248 / 0.48);
-  stroke-width: 1.5;
-  filter: drop-shadow(0 0 7px rgb(45 212 191 / 0.42));
-  animation: helix-pulse 7s ease-in-out infinite;
-}
-
 @keyframes network-drift {
   to { stroke-dashoffset: -120; }
 }
@@ -346,11 +308,6 @@ body {
 
 @keyframes grid-drift {
   to { transform: translate3d(72px, 72px, 0); }
-}
-
-@keyframes glow-breathe {
-  0%, 100% { opacity: 0.45; transform: translate(-50%, -50%) scale(0.95); }
-  50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.08); }
 }
 
 @keyframes heading-shimmer {
@@ -366,31 +323,14 @@ body {
   to { stroke-dashoffset: -192; }
 }
 
-@keyframes network-pulse {
-  0%, 100% { opacity: 0.58; }
-  50% { opacity: 1; }
-}
-
-@keyframes particle-float {
-  0%, 100% { opacity: 0.32; transform: translate3d(0, 5px, 0); }
-  50% { opacity: 0.78; transform: translate3d(0, -8px, 0); }
-}
-
-@keyframes helix-pulse {
-  0%, 100% { opacity: 0.45; transform: translateX(0); }
-  50% { opacity: 0.9; transform: translateX(-3px); }
-}
-
 @keyframes brain-cortex-pulse {
   0%, 100% {
     stroke-dashoffset: 0;
     opacity: 0.75;
-    filter: drop-shadow(0 0 6px rgba(45, 212, 191, 0.4));
   }
   50% {
     stroke-dashoffset: 40;
     opacity: 1;
-    filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.8));
   }
 }
 
@@ -418,33 +358,5 @@ body {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
-  }
-
-  .tech-network__lines,
-  .hero-background::before,
-  .hero-background__glow,
-  .tech-network,
-  .hero-heading,
-  .tech-network__brain,
-  .tech-network__streams,
-  .tech-network__nodes,
-  .tech-network__particles,
-  .tech-network__helix {
-    animation: none;
-  }
-
-  .dashboard-holographic-backdrop__grid,
-  .dashboard-holographic-backdrop__orb {
-    animation: none;
-  }
-
-  .dashboard-card:hover {
-    transform: none;
-  }
-
-  .dark-dashboard main article:hover,
-  .dark-dashboard main [class*="rounded-2xl"][class*="border"]:hover,
-  .dark-dashboard main button:hover:not(:disabled) {
-    transform: none;
   }
 }
