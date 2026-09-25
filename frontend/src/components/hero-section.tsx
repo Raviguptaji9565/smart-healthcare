@@ -14,7 +14,11 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 
-export function HeroSection() {
+export function HeroSection({
+  onOpenAIChat,
+}: {
+  onOpenAIChat?: () => void;
+}) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-slate-100 to-emerald-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/20 pt-16 pb-20 md:pt-24 md:pb-28 px-4 sm:px-6 lg:px-8 transition-colors duration-200">
       {/* Decorative Ambient Orbs */}
@@ -102,12 +106,16 @@ export function HeroSection() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-200 dark:border-slate-800/80 w-full"
             >
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">
+              <button
+                type="button"
+                onClick={onOpenAIChat}
+                className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium text-left hover:text-emerald-600 dark:hover:text-emerald-400 transition"
+              >
                 <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                   <Activity className="w-4 h-4" />
                 </div>
                 <span>24/7 AI Diagnostic</span>
-              </div>
+              </button>
 
               <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">
                 <div className="p-1.5 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20">
@@ -177,12 +185,14 @@ export function HeroSection() {
                   </div>
                 </motion.div>
 
-                {/* Floating Badge 2: Bottom Left - AI Health Risk Score */}
-                <motion.div
+                {/* Floating Badge 2: Bottom Left - AI Health Risk Score (Clickable Trigger) */}
+                <motion.button
+                  type="button"
+                  onClick={onOpenAIChat}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.7 }}
-                  className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 backdrop-blur-md bg-white/70 dark:bg-slate-900/80 border border-white/40 dark:border-slate-700/80 rounded-xl px-3 py-2 sm:px-4 sm:py-2.5 shadow-lg flex items-center gap-3"
+                  className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 backdrop-blur-md bg-white/80 dark:bg-slate-900/85 border border-emerald-500/40 rounded-xl px-3 py-2 sm:px-4 sm:py-2.5 shadow-lg flex items-center gap-3 hover:scale-[1.03] transition-all cursor-pointer text-left"
                 >
                   <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                     <Bot className="w-4 h-4" />
@@ -198,7 +208,7 @@ export function HeroSection() {
                       Risk Score: <strong className="text-emerald-600 dark:text-emerald-400">Low (98% Normal)</strong>
                     </span>
                   </div>
-                </motion.div>
+                </motion.button>
               </div>
             </div>
           </motion.div>

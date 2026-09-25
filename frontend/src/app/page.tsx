@@ -1,46 +1,12 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { HeroSection } from '@/components/hero-section';
-import { Activity, ShieldCheck, Heart, Calendar, Pill, Stethoscope, ArrowRight, Bot } from 'lucide-react';
-
-const FEATURES = [
-  {
-    icon: Calendar,
-    title: 'Smart Appointment Booking',
-    desc: 'Book consultations with specialist doctors in seconds. Real-time status tracking and instant confirmation.',
-    color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-800',
-  },
-  {
-    icon: Activity,
-    title: 'Health Metrics Tracking',
-    desc: 'Monitor heart rate, blood pressure, glucose, and sleep trends — all in one unified health telemetry dashboard.',
-    color: 'bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-200 dark:border-teal-800',
-  },
-  {
-    icon: Bot,
-    title: 'Streaming AI Assistant',
-    desc: 'Get instant, evidence-based answers to health queries with our Vercel AI SDK powered 24/7 assistant.',
-    color: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-800',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Symptom Risk Assessment',
-    desc: 'Interactive 4-step health questionnaire calculates dynamic Risk Scores (Low, Moderate, High) with actionable advice.',
-    color: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800',
-  },
-  {
-    icon: Pill,
-    title: 'Medicine Reminders & OCR',
-    desc: 'Track daily medication adherence with single-click updates and OCR prescription image scan extraction.',
-    color: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800',
-  },
-  {
-    icon: Stethoscope,
-    title: 'Doctor Clinical Portal',
-    desc: 'Physicians manage patient queues, review vital trends, confirm appointments, and log clinical notes seamlessly.',
-    color: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-200 dark:border-rose-800',
-  },
-];
+import { FeaturesBentoGrid } from '@/components/features-bento-grid';
+import { AIChatDrawer } from '@/components/ai-chat-drawer';
+import { Bot, Sparkles, Calendar, Activity, Pill, ShieldCheck, Stethoscope } from 'lucide-react';
 
 const STATS = [
   { value: '99.8%', label: 'Vitals Uptime' },
@@ -50,12 +16,13 @@ const STATS = [
 ];
 
 export default function Home() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col transition-colors duration-200 animate-page-enter">
-
       {/* Main Navbar */}
       <header className="border-b border-border bg-background/80 sticky top-0 z-50 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-teal-600 flex items-center justify-center font-bold text-lg text-white transition-transform duration-300 hover:rotate-12">
               +
@@ -66,13 +33,29 @@ export default function Home() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            <Link href="#features" className="hover:text-primary transition">Features</Link>
-            <Link href="/dashboard/patient" className="hover:text-primary transition">Patient Portal</Link>
-            <Link href="/dashboard/doctor" className="hover:text-primary transition">Doctor Portal</Link>
+            <Link href="#features" className="hover:text-primary transition">
+              Features
+            </Link>
+            <Link href="/dashboard/patient" className="hover:text-primary transition">
+              Patient Portal
+            </Link>
+            <Link href="/dashboard/doctor" className="hover:text-primary transition">
+              Doctor Portal
+            </Link>
           </nav>
 
           <div className="flex items-center gap-3">
-            {/* Prominent Theme Switcher */}
+            {/* AI Assistant Quick Trigger */}
+            <button
+              type="button"
+              onClick={() => setIsChatOpen(true)}
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 text-xs font-semibold hover:bg-emerald-500/20 transition"
+            >
+              <Bot className="w-3.5 h-3.5" />
+              <span>AI Chat</span>
+            </button>
+
+            {/* Theme Switcher */}
             <ThemeToggle variant="dropdown" />
 
             <Link
@@ -92,59 +75,56 @@ export default function Home() {
       </header>
 
       {/* Hero Section Component */}
-      <HeroSection />
+      <HeroSection onOpenAIChat={() => setIsChatOpen(true)} />
 
-      {/* Stats Section */}
-      <section className="py-10 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+      {/* Apple/Vercel Bento Grid Features Section */}
+      <FeaturesBentoGrid onOpenAIChat={() => setIsChatOpen(true)} />
+
+      {/* Key Performance Stats Section */}
+      <section className="py-12 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
             {STATS.map((stat) => (
               <div key={stat.label}>
-                <p className="text-3xl font-extrabold text-teal-600 dark:text-teal-400">{stat.value}</p>
-                <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">{stat.label}</p>
+                <p className="text-3xl font-extrabold text-teal-600 dark:text-teal-400">
+                  {stat.value}
+                </p>
+                <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section id="features" className="py-20 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100">
-            Comprehensive Clinical & Patient Capabilities
-          </h2>
-          <p className="text-slate-500 dark:text-slate-400 text-sm mt-2 max-w-lg mx-auto">
-            Engineered with App Router Next.js 16, TypeScript, Tailwind CSS, and Vercel AI SDK
-          </p>
-        </div>
+      {/* Floating Action Button for Mobile / Quick AI Access */}
+      <button
+        type="button"
+        onClick={() => setIsChatOpen(true)}
+        className="fixed bottom-6 right-6 z-40 p-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-600 to-cyan-500 text-white shadow-2xl hover:scale-105 transition-all duration-200 flex items-center gap-2 font-semibold text-xs border border-white/30 backdrop-blur-md"
+        aria-label="Open AI Assistant"
+      >
+        <Bot className="w-5 h-5 animate-bounce" />
+        <span className="hidden sm:inline">Ask AI Doctor</span>
+      </button>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {FEATURES.map((f) => {
-            const IconComponent = f.icon;
-            return (
-              <div
-                key={f.title}
-                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 hover:-translate-y-1 hover:shadow-md transition-all"
-              >
-                <div className={`w-11 h-11 rounded-xl border flex items-center justify-center text-xl mb-4 ${f.color}`}>
-                  <IconComponent className="w-5 h-5" />
-                </div>
-                <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-2 text-base">{f.title}</h3>
-                <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">{f.desc}</p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      {/* Slide-Out AI Health Assistant Drawer */}
+      <AIChatDrawer isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-800 py-8 px-6 text-center mt-auto">
+      <footer className="border-t border-slate-200 dark:border-slate-800 py-8 px-6 text-center mt-auto bg-slate-50 dark:bg-slate-950">
         <div className="flex items-center justify-center gap-2 mb-2">
-          <div className="w-6 h-6 rounded-md bg-teal-600 flex items-center justify-center text-white text-xs font-bold">+</div>
-          <span className="font-bold text-slate-800 dark:text-slate-200 text-sm">SmartHealth AI</span>
+          <div className="w-6 h-6 rounded-md bg-teal-600 flex items-center justify-center text-white text-xs font-bold">
+            +
+          </div>
+          <span className="font-bold text-slate-800 dark:text-slate-200 text-sm">
+            SmartHealth AI
+          </span>
         </div>
-        <p className="text-xs text-slate-400">© 2026 SmartHealth AI — Clinical AI Decision Support System.</p>
+        <p className="text-xs text-slate-500 dark:text-slate-400">
+          © 2026 SmartHealth AI — Clinical Decision Support & Telemetry System.
+        </p>
       </footer>
     </div>
   );
